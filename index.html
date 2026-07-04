@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>CSX Holding — Ecossistema Corporativo</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,183 +13,261 @@
         }
 
         body {
-            background: #000;
-            color: #fff;
-            font-family: 'Rajdhani', sans-serif;
-            overflow: hidden;
-            height: 100vh;
-            width: 100vw;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: #f5f5f5;
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        .bg-gradient {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(ellipse at 50% 100%, rgba(255,255,255,0.03) 0%, transparent 60%),
-                radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.02) 0%, transparent 40%),
-                linear-gradient(180deg, #000 0%, #0a0a0a 50%, #000 100%);
-            z-index: 0;
-        }
-
-        .bg-grid {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-            background-size: 60px 60px;
-            z-index: 0;
-        }
-
+        /* Header */
         .header {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
+            background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%);
+            padding: 40px 20px;
             text-align: center;
-            z-index: 10;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 200"><path d="M0,100 Q300,50 600,100 T1200,100" stroke="rgba(212,175,55,0.1)" stroke-width="2" fill="none"/></svg>') repeat-x;
+            opacity: 0.3;
         }
 
         .header h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.4rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
             font-weight: 700;
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            background: linear-gradient(90deg, #fff 0%, #888 50%, #fff 100%);
+            background: linear-gradient(135deg, #d4af37 0%, #f4e5c3 50%, #d4af37 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-        }
-
-        .header p {
-            font-size: 0.75rem;
+            margin-bottom: 10px;
             letter-spacing: 3px;
-            color: rgba(255,255,255,0.4);
-            margin-top: 4px;
-            text-transform: uppercase;
-        }
-
-        .map-container {
             position: relative;
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
             z-index: 1;
         }
 
-        .map-svg {
-            width: 100%;
+        .header p {
+            font-size: 1rem;
+            color: rgba(245, 245, 245, 0.7);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: rgba(212, 175, 55, 0.8);
+            margin-top: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Container principal */
+        .container {
             max-width: 1400px;
-            height: auto;
-            max-height: 90vh;
+            margin: 0 auto;
+            padding: 40px 20px;
         }
 
-        .sector {
+        /* Grid de setores */
+        .sectors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .sector-card {
+            background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 12px;
+            padding: 30px;
             cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .sector-path {
-            fill: rgba(255,255,255,0.02);
-            stroke: rgba(255,255,255,0.3);
-            stroke-width: 1;
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
         }
 
-        .sector:hover .sector-path {
-            fill: rgba(255,255,255,0.08);
-            stroke: rgba(255,255,255,0.8);
-            stroke-width: 1.5;
-            filter: drop-shadow(0 0 15px rgba(255,255,255,0.2));
+        .sector-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
 
-        .sector.active .sector-path {
-            fill: rgba(255,255,255,0.12);
-            stroke: #fff;
-            stroke-width: 2;
-            filter: drop-shadow(0 0 25px rgba(255,255,255,0.3));
+        .sector-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(212, 175, 55, 0.5);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 30px rgba(212, 175, 55, 0.1);
         }
 
-        .sector-label {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 11px;
-            font-weight: 600;
-            fill: rgba(255,255,255,0.7);
-            text-anchor: middle;
-            pointer-events: none;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
+        .sector-card:hover::before {
+            opacity: 1;
         }
 
-        .sector:hover .sector-label {
-            fill: #fff;
-        }
-
-        .sector-sublabel {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 9px;
-            font-weight: 400;
-            fill: rgba(255,255,255,0.35);
-            text-anchor: middle;
-            pointer-events: none;
-            letter-spacing: 0.5px;
-        }
-
-        .center-logo {
-            cursor: pointer;
-        }
-
-        .center-circle {
-            fill: rgba(255,255,255,0.03);
-            stroke: rgba(255,255,255,0.5);
-            stroke-width: 1.5;
+        .sector-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0.05) 100%);
+            border-radius: 50%;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            font-size: 2.5rem;
             transition: all 0.4s ease;
         }
 
-        .center-logo:hover .center-circle {
-            fill: rgba(255,255,255,0.08);
-            stroke: #fff;
-            filter: drop-shadow(0 0 20px rgba(255,255,255,0.3));
+        .sector-card:hover .sector-icon {
+            transform: scale(1.1);
+            border-color: rgba(212, 175, 55, 0.6);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
         }
 
-        .center-text {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 22px;
-            font-weight: 800;
-            fill: #fff;
-            text-anchor: middle;
-            letter-spacing: 4px;
+        .sector-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #d4af37;
+            margin-bottom: 8px;
+            text-align: center;
         }
 
-        .center-subtext {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 9px;
-            font-weight: 400;
-            fill: rgba(255,255,255,0.5);
-            text-anchor: middle;
-            letter-spacing: 3px;
-        }
-
-        .inner-ring-label {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 8px;
-            font-weight: 500;
-            fill: rgba(255,255,255,0.5);
-            text-anchor: middle;
+        .sector-subtitle {
+            font-size: 0.85rem;
+            color: rgba(245, 245, 245, 0.6);
+            text-align: center;
+            margin-bottom: 20px;
             letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .sector-companies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .company-tag {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: rgba(245, 245, 245, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        .sector-card:hover .company-tag {
+            background: rgba(212, 175, 55, 0.15);
+            border-color: rgba(212, 175, 55, 0.5);
+        }
+
+        /* Card CSX Central */
+        .csx-central {
+            background: linear-gradient(145deg, rgba(212, 175, 55, 0.08) 0%, rgba(212, 175, 55, 0.03) 100%);
+            border: 2px solid rgba(212, 175, 55, 0.4);
+            border-radius: 16px;
+            padding: 50px 30px;
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .csx-central::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .csx-central:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.2);
+        }
+
+        .csx-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #d4af37 0%, #f4e5c3 50%, #d4af37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            letter-spacing: 8px;
+        }
+
+        .csx-description {
+            font-size: 1rem;
+            color: rgba(245, 245, 245, 0.7);
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .csx-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #d4af37;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: rgba(245, 245, 245, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
         }
 
         /* Modal */
@@ -199,10 +277,10 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.85);
+            background: rgba(0,0,0,0.9);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            z-index: 100;
+            z-index: 1000;
             display: none;
             align-items: center;
             justify-content: center;
@@ -216,20 +294,18 @@
         }
 
         .modal {
-            background: linear-gradient(145deg, rgba(20,20,20,0.95) 0%, rgba(5,5,5,0.98) 100%);
-            border: 1px solid rgba(255,255,255,0.15);
+            background: linear-gradient(145deg, #2a2a2a 0%, #1a1a1a 100%);
+            border: 2px solid rgba(212, 175, 55, 0.3);
             border-radius: 16px;
             padding: 40px;
-            max-width: 500px;
+            max-width: 600px;
             width: 90%;
-            max-height: 80vh;
+            max-height: 85vh;
             overflow-y: auto;
             position: relative;
             transform: scale(0.9);
             transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: 
-                0 0 60px rgba(255,255,255,0.05),
-                inset 0 1px 0 rgba(255,255,255,0.1);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
         }
 
         .modal-overlay.show .modal {
@@ -238,46 +314,61 @@
 
         .modal-close {
             position: absolute;
-            top: 16px;
+            top: 20px;
             right: 20px;
-            background: none;
-            border: 1px solid rgba(255,255,255,0.2);
-            color: #fff;
-            width: 36px;
-            height: 36px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            color: #d4af37;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            font-size: 18px;
+            font-size: 20px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
-            font-family: 'Rajdhani', sans-serif;
+            font-family: 'Montserrat', sans-serif;
         }
 
         .modal-close:hover {
-            background: rgba(255,255,255,0.1);
-            border-color: #fff;
+            background: rgba(212, 175, 55, 0.2);
+            border-color: #d4af37;
+            transform: rotate(90deg);
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
         }
 
         .modal-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.6rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 6px;
-            background: linear-gradient(90deg, #fff, #aaa);
+            background: linear-gradient(135deg, #d4af37 0%, #f4e5c3 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            margin-bottom: 8px;
         }
 
         .modal-sector {
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.4);
+            font-size: 0.85rem;
+            color: rgba(245, 245, 245, 0.5);
             letter-spacing: 2px;
             text-transform: uppercase;
-            margin-bottom: 30px;
-            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .modal-section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: #d4af37;
+            margin: 25px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
         }
 
         .modal-links {
@@ -289,31 +380,31 @@
         .modal-link {
             display: flex;
             align-items: center;
-            gap: 14px;
-            padding: 16px 20px;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.1);
+            gap: 15px;
+            padding: 18px 20px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(212, 175, 55, 0.2);
             border-radius: 10px;
             text-decoration: none;
-            color: #fff;
+            color: #f5f5f5;
             transition: all 0.3s ease;
             cursor: pointer;
         }
 
         .modal-link:hover {
-            background: rgba(255,255,255,0.08);
-            border-color: rgba(255,255,255,0.3);
-            transform: translateX(4px);
+            background: rgba(212, 175, 55, 0.08);
+            border-color: rgba(212, 175, 55, 0.5);
+            transform: translateX(8px);
         }
 
         .modal-link-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 20px;
             flex-shrink: 0;
         }
 
@@ -322,13 +413,13 @@
         }
 
         .modal-link-icon.website {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.1));
+            border: 1px solid rgba(212, 175, 55, 0.3);
         }
 
         .modal-link-icon.article {
             background: rgba(255,255,255,0.08);
-            border: 1px solid rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
         .modal-link-text {
@@ -336,226 +427,245 @@
         }
 
         .modal-link-text h4 {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 0.95rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
             font-weight: 600;
-            margin-bottom: 2px;
+            margin-bottom: 3px;
         }
 
         .modal-link-text p {
-            font-size: 0.75rem;
-            color: rgba(255,255,255,0.4);
+            font-size: 0.8rem;
+            color: rgba(245, 245, 245, 0.5);
         }
 
         .modal-link-arrow {
-            color: rgba(255,255,255,0.3);
-            font-size: 14px;
+            color: rgba(212, 175, 55, 0.5);
+            font-size: 16px;
             transition: transform 0.3s ease;
         }
 
         .modal-link:hover .modal-link-arrow {
-            transform: translateX(4px);
-            color: #fff;
+            transform: translateX(5px);
+            color: #d4af37;
         }
 
         .no-links {
             text-align: center;
-            padding: 30px 0;
-            color: rgba(255,255,255,0.3);
-            font-size: 0.9rem;
+            padding: 40px 20px;
+            color: rgba(245, 245, 245, 0.4);
         }
 
         .no-links-icon {
-            font-size: 2rem;
-            margin-bottom: 10px;
+            font-size: 3rem;
+            margin-bottom: 15px;
             opacity: 0.3;
         }
 
-        /* Footer info */
-        .footer-info {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            text-align: center;
-            z-index: 10;
+        .no-links p {
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
 
-        .footer-info p {
-            font-size: 0.65rem;
-            color: rgba(255,255,255,0.25);
-            letter-spacing: 2px;
-            text-transform: uppercase;
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            margin-top: 60px;
+        }
+
+        .footer p {
+            font-size: 0.85rem;
+            color: rgba(245, 245, 245, 0.4);
+            letter-spacing: 1px;
         }
 
         /* Scrollbar */
         .modal::-webkit-scrollbar {
-            width: 4px;
+            width: 6px;
         }
 
         .modal::-webkit-scrollbar-track {
-            background: transparent;
+            background: rgba(0,0,0,0.3);
         }
 
         .modal::-webkit-scrollbar-thumb {
-            background: rgba(255,255,255,0.2);
-            border-radius: 2px;
+            background: rgba(212, 175, 55, 0.3);
+            border-radius: 3px;
         }
 
-        /* Pulse animation for center */
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-
-        .center-ring {
-            fill: none;
-            stroke: rgba(255,255,255,0.2);
-            stroke-width: 0.5;
-            animation: pulse 3s ease-in-out infinite;
+        .modal::-webkit-scrollbar-thumb:hover {
+            background: rgba(212, 175, 55, 0.5);
         }
 
         /* Responsive */
         @media (max-width: 768px) {
             .header h1 {
-                font-size: 1rem;
-                letter-spacing: 4px;
+                font-size: 2rem;
+            }
+            .csx-logo {
+                font-size: 3rem;
+            }
+            .sectors-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .csx-stats {
+                flex-direction: column;
+                gap: 20px;
             }
             .modal {
-                padding: 28px;
+                padding: 30px 20px;
             }
-            .modal-title {
-                font-size: 1.3rem;
-            }
-        }
-
-        /* Loading animation */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .map-container {
-            animation: fadeIn 1s ease-out;
         }
     </style>
 </head>
 <body>
-    <div class="bg-gradient"></div>
-    <div class="bg-grid"></div>
-
     <div class="header">
-        <h1>CSX Holding</h1>
-        <p>Ecossistema Corporativo</p>
+        <h1>CSX HOLDING</h1>
+        <p>Ecossistema Corporativo de Excelência</p>
+        <div class="header-subtitle">"Construindo o futuro com estratégia e visão"</div>
     </div>
 
-    <div class="map-container">
-        <svg class="map-svg" viewBox="0 0 1200 750" preserveAspectRatio="xMidYMax meet">
-            <defs>
-                <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" style="stop-color:rgba(255,255,255,0.1)"/>
-                    <stop offset="100%" style="stop-color:rgba(255,255,255,0)"/>
-                </radialGradient>
-                <filter id="glow">
-                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-                    <feMerge>
-                        <feMergeNode in="coloredBlur"/>
-                        <feMergeNode in="SourceGraphic"/>
-                    </feMerge>
-                </filter>
-            </defs>
+    <div class="container">
+        <!-- Card CSX Central -->
+        <div class="csx-central" onclick="openModal('csx')">
+            <div class="csx-logo">CSX</div>
+            <div class="csx-description">
+                Plataforma de inteligência corporativa que combina descentralização operacional com governança de alto desempenho. Mais de 30 empresas inovadoras em setores estratégicos.
+            </div>
+            <div class="csx-stats">
+                <div class="stat">
+                    <div class="stat-number">30+</div>
+                    <div class="stat-label">Empresas</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">Setores</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">2018</div>
+                    <div class="stat-label">Fundação</div>
+                </div>
+            </div>
+        </div>
 
-            <!-- Setores do semicírculo -->
-            <!-- Cada setor é definido por: ângulo inicial, ângulo final, raio interno, raio externo -->
-            <!-- Centro: (600, 720), Raio interno: 160, Raio externo: 620 -->
+        <!-- Grid de Setores -->
+        <div class="sectors-grid">
+            <!-- Finanças & Tecnologia -->
+            <div class="sector-card" onclick="openModal('financas')">
+                <div class="sector-icon">💰</div>
+                <div class="sector-title">Finanças & Tecnologia</div>
+                <div class="sector-subtitle">CSX Capital · Nemoris · Fintechs</div>
+                <div class="sector-companies">
+                    <span class="company-tag">Inehouse</span>
+                    <span class="company-tag">Auge</span>
+                    <span class="company-tag">Nemoris</span>
+                    <span class="company-tag">AltisPay</span>
+                </div>
+            </div>
 
-            <!-- Setor 1: Finanças & Tecnologia (180° a 212°) -->
-            <g class="sector" data-sector="financas" onclick="openModal('financas')">
-                <path class="sector-path" d="M 280,720 A 320,320 0 0,1 367,432 L 137,222 A 580,580 0 0,0 20,720 Z"/>
-                <text class="sector-label" x="200" y="520">FINANÇAS</text>
-                <text class="sector-sublabel" x="200" y="540">& TECNOLOGIA</text>
-            </g>
+            <!-- Inovação & Tech -->
+            <div class="sector-card" onclick="openModal('inovacao')">
+                <div class="sector-icon">🚀</div>
+                <div class="sector-title">Inovação & Tech</div>
+                <div class="sector-subtitle">Tecnologia · Dados · Soluções Digitais</div>
+                <div class="sector-companies">
+                    <span class="company-tag">DataZ</span>
+                    <span class="company-tag">NexForge</span>
+                    <span class="company-tag">Ironbit</span>
+                </div>
+            </div>
 
-            <!-- Setor 2: Inovação & Tech (212° a 236°) -->
-            <g class="sector" data-sector="inovacao" onclick="openModal('inovacao')">
-                <path class="sector-path" d="M 367,432 A 320,320 0 0,1 458,318 L 238,98 A 580,580 0 0,0 137,222 Z"/>
-                <text class="sector-label" x="310" y="390">INOVAÇÃO</text>
-                <text class="sector-sublabel" x="310" y="408">& TECH</text>
-            </g>
+            <!-- Enterprise & Marketing -->
+            <div class="sector-card" onclick="openModal('enterprise')">
+                <div class="sector-icon">📢</div>
+                <div class="sector-title">Enterprise & Marketing</div>
+                <div class="sector-subtitle">Marketing · Entretenimento · Varejo</div>
+                <div class="sector-companies">
+                    <span class="company-tag">Space CSX</span>
+                    <span class="company-tag">BKW</span>
+                    <span class="company-tag">VOG+</span>
+                    <span class="company-tag">Construtech</span>
+                </div>
+            </div>
 
-            <!-- Setor 3: Enterprise & Marketing (236° a 262°) -->
-            <g class="sector" data-sector="enterprise" onclick="openModal('enterprise')">
-                <path class="sector-path" d="M 458,318 A 320,320 0 0,1 558,248 L 358,28 A 580,580 0 0,0 238,98 Z"/>
-                <text class="sector-label" x="420" y="290">ENTERPRISE</text>
-                <text class="sector-sublabel" x="420" y="308">& MARKETING</text>
-            </g>
+            <!-- Multipropriedade -->
+            <div class="sector-card" onclick="openModal('multipropriedade')">
+                <div class="sector-icon">🏨</div>
+                <div class="sector-title">Multipropriedade</div>
+                <div class="sector-subtitle">Horizon · Capital Fractions</div>
+                <div class="sector-companies">
+                    <span class="company-tag">Horizon Share</span>
+                    <span class="company-tag">Horizon Pass</span>
+                    <span class="company-tag">Horizon Academy</span>
+                    <span class="company-tag">Horizon One</span>
+                </div>
+            </div>
 
-            <!-- Setor 4: Multipropriedade (262° a 288°) -->
-            <g class="sector" data-sector="multipropriedade" onclick="openModal('multipropriedade')">
-                <path class="sector-path" d="M 558,248 A 320,320 0 0,1 642,222 L 462,22 A 580,580 0 0,0 358,28 Z"/>
-                <text class="sector-label" x="520" y="240">MULTI-</text>
-                <text class="sector-sublabel" x="520" y="258">PROPRIEDADE</text>
-            </g>
+            <!-- Real Estate -->
+            <div class="sector-card" onclick="openModal('realestate')">
+                <div class="sector-icon">🏛️</div>
+                <div class="sector-title">Real Estate</div>
+                <div class="sector-subtitle">Incorporação · Ativos Imobiliários</div>
+                <div class="sector-companies">
+                    <span class="company-tag">Tortoreto</span>
+                    <span class="company-tag">Baumgart</span>
+                    <span class="company-tag">Athanaska</span>
+                    <span class="company-tag">Colina d'Italia</span>
+                    <span class="company-tag">Fontana d'Italia</span>
+                </div>
+            </div>
 
-            <!-- Setor 5: Real Estate (288° a 318°) -->
-            <g class="sector" data-sector="realestate" onclick="openModal('realestate')">
-                <path class="sector-path" d="M 642,222 A 320,320 0 0,1 758,248 L 938,28 A 580,580 0 0,0 842,22 Z"/>
-                <text class="sector-label" x="700" y="240">REAL</text>
-                <text class="sector-sublabel" x="700" y="258">ESTATE</text>
-            </g>
+            <!-- Varejo & Experiência -->
+            <div class="sector-card" onclick="openModal('varejo')">
+                <div class="sector-icon">🛍️</div>
+                <div class="sector-title">Varejo & Experiência</div>
+                <div class="sector-subtitle">Shoppings · Marcas · Experiência</div>
+                <div class="sector-companies">
+                    <span class="company-tag">Axion</span>
+                    <span class="company-tag">Roman-Atik Dalen</span>
+                    <span class="company-tag">Galleria d'Italia</span>
+                    <span class="company-tag">Galleria Vittorio</span>
+                    <span class="company-tag">Nações</span>
+                </div>
+            </div>
 
-            <!-- Setor 6: Varejo & Experiência (318° a 346°) -->
-            <g class="sector" data-sector="varejo" onclick="openModal('varejo')">
-                <path class="sector-path" d="M 758,248 A 320,320 0 0,1 878,318 L 1058,98 A 580,580 0 0,0 938,28 Z"/>
-                <text class="sector-label" x="830" y="290">VAREJO &</text>
-                <text class="sector-sublabel" x="830" y="308">EXPERIÊNCIA</text>
-            </g>
+            <!-- Mineração -->
+            <div class="sector-card" onclick="openModal('mineracao')">
+                <div class="sector-icon">⛏️</div>
+                <div class="sector-title">Mineração</div>
+                <div class="sector-subtitle">Exploração · Ativos Minerais</div>
+                <div class="sector-companies">
+                    <span class="company-tag">Mineralis</span>
+                </div>
+            </div>
 
-            <!-- Setor 7: Mineração (346° a 362°) -->
-            <g class="sector" data-sector="mineracao" onclick="openModal('mineracao')">
-                <path class="sector-path" d="M 878,318 A 320,320 0 0,1 942,432 L 1122,222 A 580,580 0 0,0 1058,98 Z"/>
-                <text class="sector-label" x="940" y="390">MINERAÇÃO</text>
-            </g>
-
-            <!-- Setor 8: Foundation (362° a 380° = 2° a 20° no sistema normal, mas aqui 0° a 18°) -->
-            <g class="sector" data-sector="foundation" onclick="openModal('foundation')">
-                <path class="sector-path" d="M 942,432 A 320,320 0 0,1 920,560 L 1100,560 A 580,580 0 0,0 1122,222 Z"/>
-                <text class="sector-label" x="1000" y="500">FOUNDATION</text>
-            </g>
-
-            <!-- Anel interno com labels CSX -->
-            <circle cx="600" cy="720" r="160" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
-            <circle cx="600" cy="720" r="100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
-
-            <!-- Labels do anel interno -->
-            <text class="inner-ring-label" x="430" y="620" transform="rotate(-30, 430, 620)">CSX</text>
-            <text class="inner-ring-label" x="490" y="560" transform="rotate(-20, 490, 560)">CSX</text>
-            <text class="inner-ring-label" x="555" y="530" transform="rotate(-10, 555, 530)">CSX</text>
-            <text class="inner-ring-label" x="645" y="530" transform="rotate(10, 645, 530)">CSX</text>
-            <text class="inner-ring-label" x="710" y="560" transform="rotate(20, 710, 560)">CSX</text>
-            <text class="inner-ring-label" x="770" y="620" transform="rotate(30, 770, 620)">CSX</text>
-
-            <!-- Centro - Logo CSX Holding -->
-            <g class="center-logo" onclick="openModal('csx')">
-                <circle class="center-ring" cx="600" cy="720" r="130"/>
-                <circle class="center-circle" cx="600" cy="720" r="95"/>
-                <text class="center-text" x="600" y="715">CSX</text>
-                <text class="center-subtext" x="600" y="738">HOLDING</text>
-            </g>
-        </svg>
+            <!-- Foundation -->
+            <div class="sector-card" onclick="openModal('foundation')">
+                <div class="sector-icon">🌱</div>
+                <div class="sector-title">Foundation</div>
+                <div class="sector-subtitle">Impacto Social · Educação · Comunidade</div>
+                <div class="sector-companies">
+                    <span class="company-tag">CSX Foundation</span>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="footer-info">
-        <p>Toque em um setor para explorar</p>
+    <div class="footer">
+        <p>© 2026 CSX Holding — Governança com foco. Divisões com liderança. Crescimento com propósito.</p>
     </div>
 
     <!-- Modal -->
     <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
         <div class="modal" onclick="event.stopPropagation()">
             <button class="modal-close" onclick="closeModal()">✕</button>
-            <h2 class="modal-title" id="modalTitle"></h2>
-            <p class="modal-sector" id="modalSector"></p>
-            <div class="modal-links" id="modalLinks"></div>
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle"></h2>
+                <p class="modal-sector" id="modalSector"></p>
+            </div>
+            <div id="modalContent"></div>
         </div>
     </div>
 
@@ -682,49 +792,61 @@
             document.getElementById('modalTitle').textContent = data.nome;
             document.getElementById('modalSector').textContent = data.setor;
 
-            const linksContainer = document.getElementById('modalLinks');
-            linksContainer.innerHTML = '';
+            const contentContainer = document.getElementById('modalContent');
+            contentContainer.innerHTML = '';
 
             let hasLinks = false;
 
             // Links do setor principal
-            if (data.instagram) {
-                hasLinks = true;
-                linksContainer.innerHTML += createLinkHTML('Instagram', 'Perfil oficial no Instagram', data.instagram, 'instagram');
-            }
-            if (data.site) {
-                hasLinks = true;
-                linksContainer.innerHTML += createLinkHTML('Website', 'Site oficial', data.site, 'website');
-            }
-            if (data.materias && data.materias.length > 0) {
-                data.materias.forEach(materia => {
+            if (data.instagram || data.site || (data.materias && data.materias.length > 0)) {
+                contentContainer.innerHTML += `<h3 class="modal-section-title">Links Oficiais</h3>`;
+                contentContainer.innerHTML += '<div class="modal-links">';
+                
+                if (data.instagram) {
                     hasLinks = true;
-                    linksContainer.innerHTML += createLinkHTML('Matéria', materia.titulo, materia.url, 'article');
-                });
+                    contentContainer.innerHTML += createLinkHTML('Instagram', 'Perfil oficial no Instagram', data.instagram, 'instagram');
+                }
+                if (data.site) {
+                    hasLinks = true;
+                    contentContainer.innerHTML += createLinkHTML('Website', 'Site oficial', data.site, 'website');
+                }
+                if (data.materias && data.materias.length > 0) {
+                    data.materias.forEach(materia => {
+                        hasLinks = true;
+                        contentContainer.innerHTML += createLinkHTML('Matéria', materia.titulo, materia.url, 'article');
+                    });
+                }
+                contentContainer.innerHTML += '</div>';
             }
 
             // Empresas do setor
             if (data.empresas && data.empresas.length > 0) {
+                contentContainer.innerHTML += `<h3 class="modal-section-title">Empresas do Setor</h3>`;
+                
                 data.empresas.forEach(empresa => {
                     if (empresa.instagram || empresa.site || (empresa.materias && empresa.materias.length > 0)) {
                         hasLinks = true;
+                        contentContainer.innerHTML += `<h4 style="font-family: 'Playfair Display', serif; color: #d4af37; margin: 20px 0 10px; font-size: 1.1rem;">${empresa.nome}</h4>`;
+                        contentContainer.innerHTML += '<div class="modal-links">';
+                        
                         if (empresa.instagram) {
-                            linksContainer.innerHTML += createLinkHTML(`Instagram — ${empresa.nome}`, 'Perfil oficial', empresa.instagram, 'instagram');
+                            contentContainer.innerHTML += createLinkHTML('Instagram', 'Perfil oficial', empresa.instagram, 'instagram');
                         }
                         if (empresa.site) {
-                            linksContainer.innerHTML += createLinkHTML(`Website — ${empresa.nome}`, 'Site oficial', empresa.site, 'website');
+                            contentContainer.innerHTML += createLinkHTML('Website', 'Site oficial', empresa.site, 'website');
                         }
                         if (empresa.materias && empresa.materias.length > 0) {
                             empresa.materias.forEach(materia => {
-                                linksContainer.innerHTML += createLinkHTML(`Matéria — ${empresa.nome}`, materia.titulo, materia.url, 'article');
+                                contentContainer.innerHTML += createLinkHTML('Matéria', materia.titulo, materia.url, 'article');
                             });
                         }
+                        contentContainer.innerHTML += '</div>';
                     }
                 });
             }
 
             if (!hasLinks) {
-                linksContainer.innerHTML = `
+                contentContainer.innerHTML = `
                     <div class="no-links">
                         <div class="no-links-icon">◎</div>
                         <p>Links serão adicionados em breve.<br>Entre em contato para mais informações.</p>
@@ -739,8 +861,8 @@
 
         function createLinkHTML(titulo, descricao, url, tipo) {
             const iconMap = {
-                instagram: '',
-                website: '',
+                instagram: '📷',
+                website: '🌐',
                 article: '📰'
             };
             return `
@@ -765,17 +887,6 @@
         // Fechar modal com ESC
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeModal();
-        });
-
-        // Efeito de hover nos setores - highlight
-        document.querySelectorAll('.sector').forEach(sector => {
-            sector.addEventListener('mouseenter', function() {
-                document.querySelectorAll('.sector').forEach(s => s.classList.remove('active'));
-                this.classList.add('active');
-            });
-            sector.addEventListener('mouseleave', function() {
-                this.classList.remove('active');
-            });
         });
     </script>
 </body>
