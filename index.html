@@ -6,18 +6,22 @@
     <title>Collina d'Italia | Credibilidade e Referência em Multipropriedade</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
             --bg-primary: #050505;
-            --bg-secondary: #111111;
-            --bg-card: #161616;
+            --bg-secondary: #0d0d0d;
+            --bg-card: #141414;
             --text-primary: #ffffff;
             --text-secondary: #a0a0a0;
-            --gradient-gold: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728, #FBF5B7);
+            --gradient-silver: linear-gradient(135deg, #A8A8A8 0%, #E8E8E8 25%, #C0C0C0 50%, #F0F0F0 75%, #B0B0B0 100%);
+            --gradient-silver-subtle: linear-gradient(135deg, #8A8A8A 0%, #C8C8C8 50%, #9A9A9A 100%);
             --gradient-dark: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
             --border-color: #2a2a2a;
+            --silver: #C0C0C0;
+            --silver-light: #E8E8E8;
+            --silver-dark: #8A8A8A;
         }
 
         * {
@@ -43,24 +47,43 @@
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 1.2rem 5%;
+            padding: 1rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            background: rgba(5, 5, 5, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
+            background: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.3s ease;
         }
 
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            background: var(--gradient-gold);
+        nav.scrolled {
+            padding: 0.7rem 5%;
+            background: rgba(5, 5, 5, 0.95);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-img {
+            height: 45px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+            font-size: 1.6rem;
+            background: var(--gradient-silver);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            font-weight: 700;
+            font-weight: 600;
+            letter-spacing: 1px;
         }
 
         .nav-links {
@@ -73,12 +96,29 @@
             color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             transition: color 0.3s ease;
+            letter-spacing: 0.5px;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gradient-silver);
+            transition: width 0.3s ease;
         }
 
         .nav-links a:hover {
-            color: var(--text-primary);
+            color: var(--silver-light);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         /* --- HERO SECTION --- */
@@ -91,64 +131,173 @@
             text-align: center;
             padding: 2rem;
             position: relative;
-            background: radial-gradient(circle at 50% 50%, #1a1508 0%, #050505 70%);
+            background: var(--bg-primary);
+            overflow: hidden;
         }
 
-        .hero::before {
-            content: '';
+        .hero-bg {
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="%23BF953F" opacity="0.1"/></svg>');
-            opacity: 0.5;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://collinaditalia.com.br/wp-content/uploads/2024/12/bg-hero-collina.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.25;
+            z-index: 0;
+        }
+
+        /* Fallback caso a imagem não carregue - gradiente escuro */
+        .hero-bg-fallback {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at 50% 50%, #1a1a1a 0%, #050505 60%);
+            z-index: 0;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(5, 5, 5, 0.7) 0%,
+                rgba(5, 5, 5, 0.5) 40%,
+                rgba(5, 5, 5, 0.8) 80%,
+                rgba(5, 5, 5, 1) 100%
+            );
+            z-index: 1;
+        }
+
+        /* Grid pattern overlay */
+        .hero-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(192, 192, 192, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(192, 192, 192, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: 1;
         }
 
         .hero-content {
             position: relative;
-            z-index: 1;
+            z-index: 2;
             max-width: 800px;
+        }
+
+        .hero-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--silver);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
         }
 
         .hero h1 {
             font-family: 'Playfair Display', serif;
             font-size: clamp(2.5rem, 5vw, 4.5rem);
             margin-bottom: 1.5rem;
-            line-height: 1.2;
+            line-height: 1.15;
+            font-weight: 700;
         }
 
         .hero h1 span {
-            background: var(--gradient-gold);
+            background: var(--gradient-silver);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             color: var(--text-secondary);
             margin-bottom: 2.5rem;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            line-height: 1.7;
         }
 
         .btn-primary {
             display: inline-block;
-            padding: 1rem 2.5rem;
-            background: var(--gradient-gold);
-            color: #000;
+            padding: 0.95rem 2.5rem;
+            background: var(--gradient-silver);
+            color: #0a0a0a;
             text-decoration: none;
             font-weight: 700;
             border-radius: 50px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            font-size: 1rem;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
         }
 
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(191, 149, 63, 0.3);
+            box-shadow: 0 10px 30px rgba(192, 192, 192, 0.25);
+        }
+
+        .btn-outline {
+            display: inline-block;
+            padding: 0.85rem 2.2rem;
+            background: transparent;
+            color: var(--silver-light);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(192, 192, 192, 0.4);
+            margin-left: 1rem;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--silver);
+            background: rgba(192, 192, 192, 0.05);
+            transform: translateY(-3px);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator span {
+            font-size: 0.7rem;
+            color: var(--silver-dark);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .scroll-indicator i {
+            color: var(--silver);
+            font-size: 0.9rem;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
         }
 
         /* --- SECTIONS GENERAL --- */
@@ -163,6 +312,16 @@
             margin-bottom: 4rem;
         }
 
+        .section-header .tag {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            color: var(--silver);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+            
+        }
+
         .section-header h2 {
             font-family: 'Playfair Display', serif;
             font-size: clamp(2rem, 4vw, 3rem);
@@ -170,7 +329,7 @@
         }
 
         .section-header h2 span {
-            background: var(--gradient-gold);
+            background: var(--gradient-silver);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -186,8 +345,8 @@
         /* --- CARDS GRID --- */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.8rem;
         }
 
         .card {
@@ -208,17 +367,17 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 3px;
-            background: var(--gradient-gold);
+            height: 2px;
+            background: var(--gradient-silver);
             transform: scaleX(0);
             transform-origin: left;
             transition: transform 0.4s ease;
         }
 
         .card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-6px);
             border-color: #3a3a3a;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
         }
 
         .card:hover::before {
@@ -226,23 +385,31 @@
         }
 
         .card-icon {
-            width: 50px;
-            height: 50px;
+            width: 48px;
+            height: 48px;
             border-radius: 12px;
-            background: rgba(191, 149, 63, 0.1);
+            background: rgba(192, 192, 192, 0.08);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-            color: #D4AF37;
+            margin-bottom: 1.3rem;
+            font-size: 1.3rem;
+            color: var(--silver);
         }
 
         .card h3 {
-            font-size: 1.25rem;
-            margin-bottom: 0.75rem;
+            font-size: 1.2rem;
+            margin-bottom: 0.6rem;
             font-weight: 600;
             line-height: 1.4;
+        }
+
+        .card .source {
+            font-size: 0.8rem;
+            color: var(--silver-dark);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
         }
 
         .card p {
@@ -250,13 +417,14 @@
             font-size: 0.95rem;
             margin-bottom: 1.5rem;
             flex-grow: 1;
+            line-height: 1.6;
         }
 
         .card-link {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            color: #D4AF37;
+            color: var(--silver-light);
             text-decoration: none;
             font-weight: 600;
             font-size: 0.9rem;
@@ -265,20 +433,126 @@
 
         .card-link:hover {
             gap: 0.8rem;
+            color: var(--silver);
         }
+
+        /* --- EMPREENDIMENTOS SECTION --- */
+        .emp-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .emp-card {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            height: 260px;
+            text-decoration: none;
+            color: white;
+            border: 1px solid var(--border-color);
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .emp-card:hover {
+            transform: translateY(-6px);
+            border-color: #4a4a4a;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .emp-card-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.6s ease;
+        }
+
+        .emp-card:hover .emp-card-bg {
+            transform: scale(1.05);
+        }
+
+        .emp-card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to top,
+                rgba(0, 0, 0, 0.9) 0%,
+                rgba(0, 0, 0, 0.4) 50%,
+                rgba(0, 0, 0, 0.2) 100%
+            );
+        }
+
+        .emp-card-content {
+            position: relative;
+            z-index: 2;
+            padding: 1.8rem;
+            width: 100%;
+        }
+
+        .emp-card-content h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .emp-card-content span {
+            font-size: 0.8rem;
+            color: var(--silver);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .emp-card-arrow {
+            position: absolute;
+            right: 1.8rem;
+            bottom: 1.8rem;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(192, 192, 192, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--silver-light);
+            transition: all 0.3s ease;
+            z-index: 3;
+        }
+
+        .emp-card:hover .emp-card-arrow {
+            background: var(--gradient-silver-subtle);
+            color: #0a0a0a;
+        }
+
+        /* Fallback backgrounds para cada empreendimento */
+        .emp-bg-romantik { background: linear-gradient(135deg, #1a1020 0%, #2d1a35 50%, #1a0a20 100%); }
+        .emp-bg-nacoes-cj { background: linear-gradient(135deg, #0a1a20 0%, #102d3a 50%, #0a1520 100%); }
+        .emp-bg-nacoes { background: linear-gradient(135deg, #0a1a15 0%, #102d25 50%, #0a1510 100%); }
+        .emp-bg-csx { background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #151515 100%); }
+        .emp-bg-realestate { background: linear-gradient(135deg, #151020 0%, #202040 50%, #101525 100%); }
+        .emp-bg-g1 { background: linear-gradient(135deg, #1a1010 0%, #2d1a1a 50%, #1a0a0a 100%); }
 
         /* --- INSTAGRAM SECTION --- */
         .ig-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.2rem;
         }
 
         .ig-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 1.5rem;
+            border-radius: 14px;
+            padding: 1.3rem;
             text-decoration: none;
             color: var(--text-primary);
             transition: all 0.3s ease;
@@ -290,31 +564,66 @@
         .ig-card:hover {
             border-color: #E1306C;
             background: #1a1014;
-            transform: translateY(-5px);
+            transform: translateY(-4px);
         }
 
         .ig-icon {
-            width: 45px;
-            height: 45px;
+            width: 42px;
+            height: 42px;
             border-radius: 10px;
             background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             color: white;
             flex-shrink: 0;
         }
 
         .ig-info h4 {
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 600;
-            margin-bottom: 0.2rem;
+            margin-bottom: 0.15rem;
         }
 
         .ig-info span {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* --- STATS --- */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            padding: 3rem 5%;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            max-width: 1400px;
+            margin: 0 auto 2rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            background: var(--gradient-silver);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .stat-label {
             font-size: 0.85rem;
             color: var(--text-secondary);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 0.3rem;
         }
 
         /* --- FOOTER --- */
@@ -325,14 +634,28 @@
             margin-top: 4rem;
         }
 
+        footer .footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            background: var(--gradient-silver);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
         footer p {
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         footer a {
-            color: #D4AF37;
+            color: var(--silver-light);
             text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
         }
 
         /* --- ANIMATIONS --- */
@@ -358,16 +681,57 @@
             .grid {
                 grid-template-columns: 1fr;
             }
+            .emp-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .btn-outline {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+            .stats-bar {
+                gap: 2rem;
+            }
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 1rem;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
 <body>
 
     <!-- Navbar -->
-    <nav>
-        <div class="logo">Collina d'Italia</div>
+    <nav id="navbar">
+        <div class="logo-container">
+            <!-- 
+            ⚠️ SUBSTITUA o src abaixo pelo caminho correto do logotipo da Collina.
+            Exemplo: https://collinaditalia.com.br/wp-content/uploads/2024/.../logo.png
+            -->
+            <img
+                class="logo-img"
+                src="https://collinaditalia.com.br/wp-content/uploads/2024/10/logo-collina.png"
+                alt="Collina d'Italia"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+            >
+            <span class="logo-text" style="display:none;">COLLINA D'ITALIA</span>
+        </div>
         <ul class="nav-links">
             <li><a href="#midia">Na Mídia</a></li>
+            <li><a href="#empreendimentos">Empreendimentos</a></li>
             <li><a href="#redes">Redes Sociais</a></li>
             <li><a href="https://collinaditalia.com.br/" target="_blank">Site Oficial</a></li>
         </ul>
@@ -375,76 +739,128 @@
 
     <!-- Hero Section -->
     <header class="hero">
+        <!-- Imagem de fundo do site Collina d'Italia -->
+        <!-- ⚠️ SUBSTITUA pelo caminho correto da imagem de fundo (print do site) -->
+        <div class="hero-bg"></div>
+        <div class="hero-bg-fallback"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-pattern"></div>
+
         <div class="hero-content">
-            <h1>Referência em <span>Multipropriedade</span> e Turismo de Luxo</h1>
-            <p>Reconhecidos pelos principais veículos de comunicação do país pela nossa atuação estratégica no mercado imobiliário e hoteleiro.</p>
+            <p class="hero-subtitle">Grupo CSX</p>
+            <h1>Referência em <span>Multipropriedade</span><br>e Turismo de Luxo</h1>
+            <p>Reconhecidos pelos principais veículos de comunicação do país pela nossa atuação estratégica no mercado imobiliário e hoteleiro de alto padrão.</p>
             <a href="https://collinaditalia.com.br/" target="_blank" class="btn-primary">Conheça Nosso Projeto</a>
+            <a href="#empreendimentos" class="btn-outline">Ver Empreendimentos</a>
+        </div>
+
+        <div class="scroll-indicator">
+            <span>Role para baixo</span>
+            <i class="fas fa-chevron-down"></i>
         </div>
     </header>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="stat-item">
+            <div class="stat-number">R$ 927 Bi</div>
+            <div class="stat-label">em VGV no Setor</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">+166%</div>
+            <div class="stat-label">Crescimento</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">30+</div>
+            <div class="stat-label">Empresas do Grupo</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">R$ 79 Bi</div>
+            <div class="stat-label">em Vendas no País</div>
+        </div>
+    </div>
 
     <!-- Na Mídia Section -->
     <section id="midia">
         <div class="section-header fade-in">
+            <p class="tag">Imprensa</p>
             <h2>Na <span>Mídia</span></h2>
             <p>Veja o que os principais portais de notícias e especialistas do mercado estão dizendo sobre o setor de multipropriedade e nossos projetos.</p>
         </div>
 
         <div class="grid">
-            <!-- Card 1: G1 -->
+            <!-- Card 1: G1 - CSX Holding -->
             <article class="card fade-in">
                 <div class="card-icon"><i class="fas fa-newspaper"></i></div>
-                <h3>G1 Globo</h3>
-                <p>CSX Holding aposta na multipropriedade para impulsionar o turismo na região, destacando novos horizontes para o mercado.</p>
+                <span class="source">G1 Globo</span>
+                <h3>CSX Holding aposta na multipropriedade para impulsionar o turismo</h3>
+                <p>Grupo aposta em modelo inovador de multipropriedade para atrair investimentos e fortalecer o turismo na região do Vale do Paraíba.</p>
                 <a href="https://g1.globo.com/sp/vale-do-paraiba-regiao/especial-publicitario/csx-holding/noticia/2025/12/22/csx-holding-aposta-na-multipropriedade-para-impulsionar-turismo.ghtml" target="_blank" class="card-link">
                     Ler matéria <i class="fas fa-arrow-right"></i>
                 </a>
             </article>
 
-            <!-- Card 2: Veja -->
+            <!-- Card 2: G1 - Infoprodutos -->
             <article class="card fade-in">
                 <div class="card-icon"><i class="fas fa-chart-line"></i></div>
-                <h3>Revista Veja</h3>
-                <p>Valor de venda de multipropriedade chega a R$ 79 bi no país, mostrando a força e a maturidade deste mercado no Brasil.</p>
+                <span class="source">G1 Globo</span>
+                <h3>Posicionamento no mercado de infoprodutos de alta performance</h3>
+                <p>CSX Holding investe em multipropriedades e marca presença em evento de infoprodutos com estratégia de alto desempenho.</p>
+                <a href="https://g1.globo.com/sp/vale-do-paraiba-regiao/especial-publicitario/csx-holding-investindo-multipropriedades/noticia/2026/05/22/posicionamento-no-mercado-de-infoprodutos-de-alta-performance-conheca-evento.ghtml" target="_blank" class="card-link">
+                    Ler matéria <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- Card 3: Veja -->
+            <article class="card fade-in">
+                <div class="card-icon"><i class="fas fa-chart-bar"></i></div>
+                <span class="source">Revista Veja</span>
+                <h3>Valor de venda de multipropriedade chega a R$ 79 bi no país</h3>
+                <p>Estudo mostra a força e a maturidade do mercado de multipropriedade no Brasil, com números expressivos de crescimento.</p>
                 <a href="https://veja.abril.com.br/coluna/radar/valor-de-venda-de-multipropriedade-chega-a-r-79-bi-no-pais-mostra-estudo/" target="_blank" class="card-link">
                     Ler matéria <i class="fas fa-arrow-right"></i>
                 </a>
             </article>
 
-            <!-- Card 3: Estadão -->
+            <!-- Card 4: Estadão -->
             <article class="card fade-in">
                 <div class="card-icon"><i class="fas fa-building"></i></div>
-                <h3>O Estado de S. Paulo</h3>
-                <p>Imóveis: multipropriedade cresce 17% no Brasil e movimenta R$ 283 bilhões, consolidando-se como tendência definitiva.</p>
+                <span class="source">O Estado de S. Paulo</span>
+                <h3>Multipropriedade cresce 17% e movimenta R$ 283 bilhões</h3>
+                <p>Setor imobiliário consolida a multipropriedade como tendência definitiva no mercado brasileiro de alto padrão.</p>
                 <a href="https://imoveis.estadao.com.br/noticias/imoveis-multipropriedade-crescem-17-no-brasil-e-movimentam-r-283-bilhoes/" target="_blank" class="card-link">
                     Ler matéria <i class="fas fa-arrow-right"></i>
                 </a>
             </article>
 
-            <!-- Card 4: Desbravador -->
+            <!-- Card 5: Desbravador -->
             <article class="card fade-in">
                 <div class="card-icon"><i class="fas fa-mountain"></i></div>
-                <h3>Desbravador</h3>
-                <p>Cenário do desenvolvimento de multipropriedades no Brasil: análises sobre o crescimento e as oportunidades na região.</p>
+                <span class="source">Desbravador</span>
+                <h3>Cenário do desenvolvimento de multipropriedades no Brasil</h3>
+                <p>Análise completa sobre o crescimento e as oportunidades do mercado de multipropriedade nas principais regiões turísticas.</p>
                 <a href="https://www.desbravador.com.br/novidades/noticias/cenario-do-desenvolvimento-de-multipropriedades-no-brasil" target="_blank" class="card-link">
                     Ler matéria <i class="fas fa-arrow-right"></i>
                 </a>
             </article>
 
-            <!-- Card 5: Jusbrasil -->
+            <!-- Card 6: Jusbrasil -->
             <article class="card fade-in">
                 <div class="card-icon"><i class="fas fa-balance-scale"></i></div>
-                <h3>Jusbrasil</h3>
-                <p>Multipropriedade no Brasil: tendências, segurança jurídica e os desafios para os próximos anos do mercado imobiliário.</p>
+                <span class="source">Jusbrasil</span>
+                <h3>Multipropriedade no Brasil: tendências e desafios</h3>
+                <p>Segurança jurídica, inovações legislativas e os desafios para os próximos anos do mercado imobiliário.</p>
                 <a href="https://www.jusbrasil.com.br/artigos/multipropriedade-no-brasil-tendencias-e-desafios/2655703045" target="_blank" class="card-link">
                     Ler matéria <i class="fas fa-arrow-right"></i>
                 </a>
             </article>
 
-            <!-- Card 6: JC -->
+            <!-- Card 7: JC UOL -->
             <article class="card fade-in">
                 <div class="card-icon"><i class="fas fa-coins"></i></div>
-                <h3>Jornal do Commercio</h3>
-                <p>Multipropriedade cresce 166% e alcança R$ 927 bilhões em VGV, batendo recordes históricos no setor de hospedagem.</p>
+                <span class="source">Jornal do Commercio</span>
+                <h3>Multipropriedade cresce 166% e alcança R$ 927 bilhões em VGV</h3>
+                <p>Recorde histórico no setor de hospedagem comprova a solidez e o potencial de crescimento do segmento.</p>
                 <a href="https://jc.uol.com.br/colunas/metro-quadrado/2025/06/13/multipropriedade-cresce-166-e-alcanca-rs-927-bilhoes-em-vgv.html" target="_blank" class="card-link">
                     Ler matéria <i class="fas fa-arrow-right"></i>
                 </a>
@@ -452,9 +868,88 @@
         </div>
     </section>
 
+    <!-- Empreendimentos do Grupo -->
+    <section id="empreendimentos">
+        <div class="section-header fade-in">
+            <p class="tag">Grupo CSX</p>
+            <h2>Nossos <span>Empreendimentos</span></h2>
+            <p>Conheça as empresas e projetos que fazem parte do ecossistema CSX Holding, referência em multipropriedade e desenvolvimento imobiliário.</p>
+        </div>
+
+        <div class="emp-grid">
+            <!-- Romantik Dalen -->
+            <a href="https://romantikdalen.com.br/" target="_blank" class="emp-card fade-in">
+                <div class="emp-card-bg" style="background-image: url('https://romantikdalen.com.br/wp-content/uploads/2024/fonte-amor-eterno.jpg');"></div>
+                <div class="emp-bg-romantik emp-card-bg" style="background-image: none;"></div>
+                <div class="emp-card-overlay"></div>
+                <div class="emp-card-content">
+                    <h4>Romantik Dalen</h4>
+                    <span>Parque Temático Romântico</span>
+                </div>
+                <div class="emp-card-arrow"><i class="fas fa-arrow-right"></i></div>
+            </a>
+
+            <!-- Nações Mall CJ -->
+            <a href="https://nacoesmallcj.com.br/" target="_blank" class="emp-card fade-in">
+                <div class="emp-bg-nacoes-cj emp-card-bg"></div>
+                <div class="emp-card-overlay"></div>
+                <div class="emp-card-content">
+                    <h4>Nações Mall CJ</h4>
+                    <span>Open Mall Premium · Campos do Jordão</span>
+                </div>
+                <div class="emp-card-arrow"><i class="fas fa-arrow-right"></i></div>
+            </a>
+
+            <!-- Nações Mall SJC -->
+            <a href="https://nacoesmall.com/" target="_blank" class="emp-card fade-in">
+                <div class="emp-bg-nacoes emp-card-bg"></div>
+                <div class="emp-card-overlay"></div>
+                <div class="emp-card-content">
+                    <h4>Nações Mall</h4>
+                    <span>Shopping · São José dos Campos</span>
+                </div>
+                <div class="emp-card-arrow"><i class="fas fa-arrow-right"></i></div>
+            </a>
+
+            <!-- CSX Holding -->
+            <a href="https://csxholding.com.br/" target="_blank" class="emp-card fade-in">
+                <div class="emp-bg-csx emp-card-bg"></div>
+                <div class="emp-card-overlay"></div>
+                <div class="emp-card-content">
+                    <h4>CSX Holding</h4>
+                    <span>Estratégia e Inovação Corporativa</span>
+                </div>
+                <div class="emp-card-arrow"><i class="fas fa-arrow-right"></i></div>
+            </a>
+
+            <!-- CSX Real Estate -->
+            <a href="https://csxrealstate.com.br/" target="_blank" class="emp-card fade-in">
+                <div class="emp-bg-realestate emp-card-bg"></div>
+                <div class="emp-card-overlay"></div>
+                <div class="emp-card-content">
+                    <h4>CSX Real Estate</h4>
+                    <span>Gestão Imobiliária Institucional</span>
+                </div>
+                <div class="emp-card-arrow"><i class="fas fa-arrow-right"></i></div>
+            </a>
+
+            <!-- G1 - Infoprodutos -->
+            <a href="https://g1.globo.com/sp/vale-do-paraiba-regiao/especial-publicitario/csx-holding-investindo-multipropriedades/noticia/2026/05/22/posicionamento-no-mercado-de-infoprodutos-de-alta-performance-conheca-evento.ghtml" target="_blank" class="emp-card fade-in">
+                <div class="emp-bg-g1 emp-card-bg"></div>
+                <div class="emp-card-overlay"></div>
+                <div class="emp-card-content">
+                    <h4>CSX na Mídia</h4>
+                    <span>G1 · Infoprodutos de Alta Performance</span>
+                </div>
+                <div class="emp-card-arrow"><i class="fas fa-arrow-right"></i></div>
+            </a>
+        </div>
+    </section>
+
     <!-- Instagram Section -->
     <section id="redes">
         <div class="section-header fade-in">
+            <p class="tag">Redes Sociais</p>
             <h2>Nossas <span>Redes Sociais</span></h2>
             <p>Acompanhe nosso dia a dia, bastidores e a experiência dos nossos hóspedes e proprietários no Instagram.</p>
         </div>
@@ -477,7 +972,7 @@
                 </div>
             </a>
 
-            <!-- Posts / Reels -->
+            <!-- Reels -->
             <a href="https://www.instagram.com/reel/DWj4z0zjg_Z/" target="_blank" class="ig-card fade-in">
                 <div class="ig-icon"><i class="fas fa-play"></i></div>
                 <div class="ig-info">
@@ -538,10 +1033,21 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 Collina d'Italia. Todos os direitos reservados. | <a href="https://collinaditalia.com.br/" target="_blank">Site Oficial</a></p>
+        <div class="footer-logo">Collina d'Italia</div>
+        <p>&copy; 2026 Collina d'Italia · Grupo CSX Holding. Todos os direitos reservados. | <a href="https://collinaditalia.com.br/" target="_blank">Site Oficial</a></p>
     </footer>
 
     <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
         // Animação de fade-in ao rolar a página
         document.addEventListener('DOMContentLoaded', () => {
             const observer = new IntersectionObserver((entries) => {
