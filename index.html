@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>CSX Holding — Ecossistema Corporativo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 50% 100%, rgba(255,255,255,0.03) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.02) 0%, transparent 40%),
+                linear-gradient(180deg, #000 0%, #0a0a0a 50%, #000 100%);
+            z-index: 0;
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: 0;
+        }
+
+        .header {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            z-index: 10;
+        }
+
+        .header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #fff 0%, #888 50%, #fff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            color: rgba(255,255,255,0.4);
+            margin-top: 4px;
+            text-transform: uppercase;
+        }
+
+        .map-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .map-svg {
+            width: 100%;
+            max-width: 1400px;
+            height: auto;
+            max-height: 90vh;
+        }
+
+        .sector {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .sector-path {
+            fill: rgba(255,255,255,0.02);
+            stroke: rgba(255,255,255,0.3);
+            stroke-width: 1;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .sector:hover .sector-path {
+            fill: rgba(255,255,255,0.08);
+            stroke: rgba(255,255,255,0.8);
+            stroke-width: 1.5;
+            filter: drop-shadow(0 0 15px rgba(255,255,255,0.2));
+        }
+
+        .sector.active .sector-path {
+            fill: rgba(255,255,255,0.12);
+            stroke: #fff;
+            stroke-width: 2;
+            filter: drop-shadow(0 0 25px rgba(255,255,255,0.3));
+        }
+
+        .sector-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            fill: rgba(255,255,255,0.7);
+            text-anchor: middle;
+            pointer-events: none;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .sector:hover .sector-label {
+            fill: #fff;
+        }
+
+        .sector-sublabel {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 9px;
+            font-weight: 400;
+            fill: rgba(255,255,255,0.35);
+            text-anchor: middle;
+            pointer-events: none;
+            letter-spacing: 0.5px;
+        }
+
+        .center-logo {
+            cursor: pointer;
+        }
+
+        .center-circle {
+            fill: rgba(255,255,255,0.03);
+            stroke: rgba(255,255,255,0.5);
+            stroke-width: 1.5;
+            transition: all 0.4s ease;
+        }
+
+        .center-logo:hover .center-circle {
+            fill: rgba(255,255,255,0.08);
+            stroke: #fff;
+            filter: drop-shadow(0 0 20px rgba(255,255,255,0.3));
+        }
+
+        .center-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 22px;
+            font-weight: 800;
+            fill: #fff;
+            text-anchor: middle;
+            letter-spacing: 4px;
+        }
+
+        .center-subtext {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 9px;
+            font-weight: 400;
+            fill: rgba(255,255,255,0.5);
+            text-anchor: middle;
+            letter-spacing: 3px;
+        }
+
+        .inner-ring-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 8px;
+            font-weight: 500;
+            fill: rgba(255,255,255,0.5);
+            text-anchor: middle;
+            letter-spacing: 1px;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 100;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal {
+            background: linear-gradient(145deg, rgba(20,20,20,0.95) 0%, rgba(5,5,5,0.98) 100%);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 
+                0 0 60px rgba(255,255,255,0.05),
+                inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+
+        .modal-overlay.show .modal {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: none;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .modal-close:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: #fff;
+        }
+
+        .modal-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+            background: linear-gradient(90deg, #fff, #aaa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .modal-sector {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.4);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .modal-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .modal-link {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 20px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            text-decoration: none;
+            color: #fff;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .modal-link:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.3);
+            transform: translateX(4px);
+        }
+
+        .modal-link-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .modal-link-icon.instagram {
+            background: linear-gradient(135deg, #833AB4, #FD1D1D, #F77737);
+        }
+
+        .modal-link-icon.website {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .modal-link-icon.article {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .modal-link-text {
+            flex: 1;
+        }
+
+        .modal-link-text h4 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .modal-link-text p {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.4);
+        }
+
+        .modal-link-arrow {
+            color: rgba(255,255,255,0.3);
+            font-size: 14px;
+            transition: transform 0.3s ease;
+        }
+
+        .modal-link:hover .modal-link-arrow {
+            transform: translateX(4px);
+            color: #fff;
+        }
+
+        .no-links {
+            text-align: center;
+            padding: 30px 0;
+            color: rgba(255,255,255,0.3);
+            font-size: 0.9rem;
+        }
+
+        .no-links-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            opacity: 0.3;
+        }
+
+        /* Footer info */
+        .footer-info {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            z-index: 10;
+        }
+
+        .footer-info p {
+            font-size: 0.65rem;
+            color: rgba(255,255,255,0.25);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Scrollbar */
+        .modal::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .modal::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .modal::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.2);
+            border-radius: 2px;
+        }
+
+        /* Pulse animation for center */
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .center-ring {
+            fill: none;
+            stroke: rgba(255,255,255,0.2);
+            stroke-width: 0.5;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1rem;
+                letter-spacing: 4px;
+            }
+            .modal {
+                padding: 28px;
+            }
+            .modal-title {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Loading animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .map-container {
+            animation: fadeIn 1s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient"></div>
+    <div class="bg-grid"></div>
+
+    <div class="header">
+        <h1>CSX Holding</h1>
+        <p>Ecossistema Corporativo</p>
+    </div>
+
+    <div class="map-container">
+        <svg class="map-svg" viewBox="0 0 1200 750" preserveAspectRatio="xMidYMax meet">
+            <defs>
+                <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" style="stop-color:rgba(255,255,255,0.1)"/>
+                    <stop offset="100%" style="stop-color:rgba(255,255,255,0)"/>
+                </radialGradient>
+                <filter id="glow">
+                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                    <feMerge>
+                        <feMergeNode in="coloredBlur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                </filter>
+            </defs>
+
+            <!-- Setores do semicírculo -->
+            <!-- Cada setor é definido por: ângulo inicial, ângulo final, raio interno, raio externo -->
+            <!-- Centro: (600, 720), Raio interno: 160, Raio externo: 620 -->
+
+            <!-- Setor 1: Finanças & Tecnologia (180° a 212°) -->
+            <g class="sector" data-sector="financas" onclick="openModal('financas')">
+                <path class="sector-path" d="M 280,720 A 320,320 0 0,1 367,432 L 137,222 A 580,580 0 0,0 20,720 Z"/>
+                <text class="sector-label" x="200" y="520">FINANÇAS</text>
+                <text class="sector-sublabel" x="200" y="540">& TECNOLOGIA</text>
+            </g>
+
+            <!-- Setor 2: Inovação & Tech (212° a 236°) -->
+            <g class="sector" data-sector="inovacao" onclick="openModal('inovacao')">
+                <path class="sector-path" d="M 367,432 A 320,320 0 0,1 458,318 L 238,98 A 580,580 0 0,0 137,222 Z"/>
+                <text class="sector-label" x="310" y="390">INOVAÇÃO</text>
+                <text class="sector-sublabel" x="310" y="408">& TECH</text>
+            </g>
+
+            <!-- Setor 3: Enterprise & Marketing (236° a 262°) -->
+            <g class="sector" data-sector="enterprise" onclick="openModal('enterprise')">
+                <path class="sector-path" d="M 458,318 A 320,320 0 0,1 558,248 L 358,28 A 580,580 0 0,0 238,98 Z"/>
+                <text class="sector-label" x="420" y="290">ENTERPRISE</text>
+                <text class="sector-sublabel" x="420" y="308">& MARKETING</text>
+            </g>
+
+            <!-- Setor 4: Multipropriedade (262° a 288°) -->
+            <g class="sector" data-sector="multipropriedade" onclick="openModal('multipropriedade')">
+                <path class="sector-path" d="M 558,248 A 320,320 0 0,1 642,222 L 462,22 A 580,580 0 0,0 358,28 Z"/>
+                <text class="sector-label" x="520" y="240">MULTI-</text>
+                <text class="sector-sublabel" x="520" y="258">PROPRIEDADE</text>
+            </g>
+
+            <!-- Setor 5: Real Estate (288° a 318°) -->
+            <g class="sector" data-sector="realestate" onclick="openModal('realestate')">
+                <path class="sector-path" d="M 642,222 A 320,320 0 0,1 758,248 L 938,28 A 580,580 0 0,0 842,22 Z"/>
+                <text class="sector-label" x="700" y="240">REAL</text>
+                <text class="sector-sublabel" x="700" y="258">ESTATE</text>
+            </g>
+
+            <!-- Setor 6: Varejo & Experiência (318° a 346°) -->
+            <g class="sector" data-sector="varejo" onclick="openModal('varejo')">
+                <path class="sector-path" d="M 758,248 A 320,320 0 0,1 878,318 L 1058,98 A 580,580 0 0,0 938,28 Z"/>
+                <text class="sector-label" x="830" y="290">VAREJO &</text>
+                <text class="sector-sublabel" x="830" y="308">EXPERIÊNCIA</text>
+            </g>
+
+            <!-- Setor 7: Mineração (346° a 362°) -->
+            <g class="sector" data-sector="mineracao" onclick="openModal('mineracao')">
+                <path class="sector-path" d="M 878,318 A 320,320 0 0,1 942,432 L 1122,222 A 580,580 0 0,0 1058,98 Z"/>
+                <text class="sector-label" x="940" y="390">MINERAÇÃO</text>
+            </g>
+
+            <!-- Setor 8: Foundation (362° a 380° = 2° a 20° no sistema normal, mas aqui 0° a 18°) -->
+            <g class="sector" data-sector="foundation" onclick="openModal('foundation')">
+                <path class="sector-path" d="M 942,432 A 320,320 0 0,1 920,560 L 1100,560 A 580,580 0 0,0 1122,222 Z"/>
+                <text class="sector-label" x="1000" y="500">FOUNDATION</text>
+            </g>
+
+            <!-- Anel interno com labels CSX -->
+            <circle cx="600" cy="720" r="160" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+            <circle cx="600" cy="720" r="100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+
+            <!-- Labels do anel interno -->
+            <text class="inner-ring-label" x="430" y="620" transform="rotate(-30, 430, 620)">CSX</text>
+            <text class="inner-ring-label" x="490" y="560" transform="rotate(-20, 490, 560)">CSX</text>
+            <text class="inner-ring-label" x="555" y="530" transform="rotate(-10, 555, 530)">CSX</text>
+            <text class="inner-ring-label" x="645" y="530" transform="rotate(10, 645, 530)">CSX</text>
+            <text class="inner-ring-label" x="710" y="560" transform="rotate(20, 710, 560)">CSX</text>
+            <text class="inner-ring-label" x="770" y="620" transform="rotate(30, 770, 620)">CSX</text>
+
+            <!-- Centro - Logo CSX Holding -->
+            <g class="center-logo" onclick="openModal('csx')">
+                <circle class="center-ring" cx="600" cy="720" r="130"/>
+                <circle class="center-circle" cx="600" cy="720" r="95"/>
+                <text class="center-text" x="600" y="715">CSX</text>
+                <text class="center-subtext" x="600" y="738">HOLDING</text>
+            </g>
+        </svg>
+    </div>
+
+    <div class="footer-info">
+        <p>Toque em um setor para explorar</p>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+        <div class="modal" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal()">✕</button>
+            <h2 class="modal-title" id="modalTitle"></h2>
+            <p class="modal-sector" id="modalSector"></p>
+            <div class="modal-links" id="modalLinks"></div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // DADOS DAS EMPRESAS - Adicione os links aqui
+        // ============================================
+        const empresasData = {
+            csx: {
+                nome: "CSX Holding",
+                setor: "Núcleo Estratégico do Conglomerado",
+                instagram: "https://instagram.com/csxholding",
+                site: "https://csxholding.com.br",
+                materias: [
+                    { titulo: "Site Oficial CSX Holding", url: "https://csxholding.com.br" }
+                ]
+            },
+            financas: {
+                nome: "Finanças & Tecnologia",
+                setor: "CSX Capital · Nemoris · Fintechs",
+                empresas: [
+                    { nome: "Inehouse", instagram: "", site: "", materias: [] },
+                    { nome: "Auge", instagram: "", site: "", materias: [] },
+                    { nome: "Nemoris", instagram: "", site: "", materias: [] },
+                    { nome: "AltisPay", instagram: "", site: "", materias: [] }
+                ],
+                instagram: "",
+                site: "",
+                materias: []
+            },
+            inovacao: {
+                nome: "Inovação & Tech",
+                setor: "Tecnologia · Dados · Soluções Digitais",
+                empresas: [
+                    { nome: "DataZ", instagram: "", site: "", materias: [] },
+                    { nome: "NexForge", instagram: "", site: "", materias: [] },
+                    { nome: "Ironbit", instagram: "", site: "", materias: [] }
+                ],
+                instagram: "",
+                site: "",
+                materias: []
+            },
+            enterprise: {
+                nome: "Enterprise & Marketing",
+                setor: "Marketing · Entretenimento · Varejo",
+                empresas: [
+                    { nome: "Space CSX", instagram: "", site: "", materias: [] },
+                    { nome: "BKW", instagram: "", site: "", materias: [] },
+                    { nome: "VOG+", instagram: "", site: "", materias: [] },
+                    { nome: "Construtech", instagram: "", site: "", materias: [] }
+                ],
+                instagram: "",
+                site: "",
+                materias: []
+            },
+            multipropriedade: {
+                nome: "Multipropriedade",
+                setor: "Horizon · Capital Fractions",
+                empresas: [
+                    { nome: "Horizon Share", instagram: "", site: "", materias: [] },
+                    { nome: "Horizon Pass", instagram: "", site: "", materias: [] },
+                    { nome: "Horizon Academy", instagram: "", site: "", materias: [] },
+                    { nome: "Horizon One", instagram: "", site: "", materias: [] }
+                ],
+                instagram: "",
+                site: "",
+                materias: []
+            },
+            realestate: {
+                nome: "Real Estate",
+                setor: "Incorporação · Ativos Imobiliários",
+                empresas: [
+                    { nome: "Tortoreto", instagram: "", site: "", materias: [] },
+                    { nome: "Baumgart", instagram: "", site: "", materias: [] },
+                    { nome: "Athanaska", instagram: "", site: "", materias: [] },
+                    { nome: "Colina d'Italia", instagram: "", site: "", materias: [] },
+                    { nome: "Fontana d'Italia", instagram: "", site: "", materias: [] }
+                ],
+                instagram: "",
+                site: "",
+                materias: []
+            },
+            varejo: {
+                nome: "Varejo & Experiência",
+                setor: "Shoppings · Marcas · Experiência",
+                empresas: [
+                    { nome: "Axion", instagram: "", site: "", materias: [] },
+                    { nome: "Roman-Atik Dalen", instagram: "", site: "", materias: [] },
+                    { nome: "Galleria d'Italia", instagram: "", site: "", materias: [] },
+                    { nome: "Galleria Vittorio", instagram: "", site: "", materias: [] },
+                    { nome: "Nações", instagram: "", site: "", materias: [] }
+                ],
+                instagram: "",
+                site: "",
+                materias: []
+            },
+            mineracao: {
+                nome: "Mineração",
+                setor: "Exploração · Ativos Minerais",
+                empresas: [
+                    { nome: "Mineralis", instagram: "", site: "", materias: [] }
+                ],
+                instagram: "",
+                site: "",
+                materias: []
+            },
+            foundation: {
+                nome: "Foundation",
+                setor: "Impacto Social · Educação · Comunidade",
+                empresas: [],
+                instagram: "",
+                site: "",
+                materias: []
+            }
+        };
+
+        // ============================================
+        // FUNÇÕES DO MODAL
+        // ============================================
+        function openModal(sectorId) {
+            const data = empresasData[sectorId];
+            if (!data) return;
+
+            document.getElementById('modalTitle').textContent = data.nome;
+            document.getElementById('modalSector').textContent = data.setor;
+
+            const linksContainer = document.getElementById('modalLinks');
+            linksContainer.innerHTML = '';
+
+            let hasLinks = false;
+
+            // Links do setor principal
+            if (data.instagram) {
+                hasLinks = true;
+                linksContainer.innerHTML += createLinkHTML('Instagram', 'Perfil oficial no Instagram', data.instagram, 'instagram');
+            }
+            if (data.site) {
+                hasLinks = true;
+                linksContainer.innerHTML += createLinkHTML('Website', 'Site oficial', data.site, 'website');
+            }
+            if (data.materias && data.materias.length > 0) {
+                data.materias.forEach(materia => {
+                    hasLinks = true;
+                    linksContainer.innerHTML += createLinkHTML('Matéria', materia.titulo, materia.url, 'article');
+                });
+            }
+
+            // Empresas do setor
+            if (data.empresas && data.empresas.length > 0) {
+                data.empresas.forEach(empresa => {
+                    if (empresa.instagram || empresa.site || (empresa.materias && empresa.materias.length > 0)) {
+                        hasLinks = true;
+                        if (empresa.instagram) {
+                            linksContainer.innerHTML += createLinkHTML(`Instagram — ${empresa.nome}`, 'Perfil oficial', empresa.instagram, 'instagram');
+                        }
+                        if (empresa.site) {
+                            linksContainer.innerHTML += createLinkHTML(`Website — ${empresa.nome}`, 'Site oficial', empresa.site, 'website');
+                        }
+                        if (empresa.materias && empresa.materias.length > 0) {
+                            empresa.materias.forEach(materia => {
+                                linksContainer.innerHTML += createLinkHTML(`Matéria — ${empresa.nome}`, materia.titulo, materia.url, 'article');
+                            });
+                        }
+                    }
+                });
+            }
+
+            if (!hasLinks) {
+                linksContainer.innerHTML = `
+                    <div class="no-links">
+                        <div class="no-links-icon">◎</div>
+                        <p>Links serão adicionados em breve.<br>Entre em contato para mais informações.</p>
+                    </div>
+                `;
+            }
+
+            const overlay = document.getElementById('modalOverlay');
+            overlay.style.display = 'flex';
+            setTimeout(() => overlay.classList.add('show'), 10);
+        }
+
+        function createLinkHTML(titulo, descricao, url, tipo) {
+            const iconMap = {
+                instagram: '',
+                website: '',
+                article: '📰'
+            };
+            return `
+                <a href="${url}" target="_blank" rel="noopener noreferrer" class="modal-link">
+                    <div class="modal-link-icon ${tipo}">${iconMap[tipo]}</div>
+                    <div class="modal-link-text">
+                        <h4>${titulo}</h4>
+                        <p>${descricao}</p>
+                    </div>
+                    <span class="modal-link-arrow">→</span>
+                </a>
+            `;
+        }
+
+        function closeModal(event) {
+            if (event && event.target !== event.currentTarget && !event.target.classList.contains('modal-close')) return;
+            const overlay = document.getElementById('modalOverlay');
+            overlay.classList.remove('show');
+            setTimeout(() => { overlay.style.display = 'none'; }, 400);
+        }
+
+        // Fechar modal com ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // Efeito de hover nos setores - highlight
+        document.querySelectorAll('.sector').forEach(sector => {
+            sector.addEventListener('mouseenter', function() {
+                document.querySelectorAll('.sector').forEach(s => s.classList.remove('active'));
+                this.classList.add('active');
+            });
+            sector.addEventListener('mouseleave', function() {
+                this.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
