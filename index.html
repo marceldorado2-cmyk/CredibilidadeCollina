@@ -1,3 +1,1050 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collina d'Italia | Credibilidade e Referência em Multipropriedade</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --bg-primary: #050505;
+            --bg-secondary: #0d0d0d;
+            --bg-card: #141414;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --gradient-silver: linear-gradient(135deg, #A8A8A8 0%, #E8E8E8 25%, #C0C0C0 50%, #F0F0F0 75%, #B0B0B0 100%);
+            --gradient-silver-subtle: linear-gradient(135deg, #8A8A8A 0%, #C8C8C8 50%, #9A9A9A 100%);
+            --gradient-dark: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+            --border-color: #2a2a2a;
+            --silver: #C0C0C0;
+            --silver-light: #E8E8E8;
+            --silver-dark: #8A8A8A;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- NAVBAR --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 0.7rem 5%;
+            background: rgba(5, 5, 5, 0.95);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            letter-spacing: 0.5px;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gradient-silver);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--silver-light);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            background: var(--bg-primary);
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('COLE_AQUI_O_LINK_DA_SUA_IMAGEM_DE_FUNDO');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(5, 5, 5, 0.7) 0%,
+                rgba(5, 5, 5, 0.5) 40%,
+                rgba(5, 5, 5, 0.8) 80%,
+                rgba(5, 5, 5, 1) 100%
+            );
+            z-index: 1;
+        }
+
+        .hero-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(192, 192, 192, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(192, 192, 192, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--silver);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.15;
+            font-weight: 700;
+        }
+
+        .hero h1 span {
+            background: var(--gradient-silver);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 0.95rem 2.5rem;
+            background: var(--gradient-silver);
+            color: #0a0a0a;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 50px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(192, 192, 192, 0.25);
+        }
+
+        .btn-outline {
+            display: inline-block;
+            padding: 0.85rem 2.2rem;
+            background: transparent;
+            color: var(--silver-light);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(192, 192, 192, 0.4);
+            margin-left: 1rem;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--silver);
+            background: rgba(192, 192, 192, 0.05);
+            transform: translateY(-3px);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator span {
+            font-size: 0.7rem;
+            color: var(--silver-dark);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .scroll-indicator i {
+            color: var(--silver);
+            font-size: 0.9rem;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* --- SECTIONS GENERAL --- */
+        section {
+            padding: 6rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header .tag {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            color: var(--silver);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1rem;
+        }
+
+        .section-header h2 span {
+            background: var(--gradient-silver);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- CARDS GRID --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gradient-silver);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: #3a3a3a;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(192, 192, 192, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.3rem;
+            font-size: 1.3rem;
+            color: var(--silver);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .card .source {
+            font-size: 0.8rem;
+            color: var(--silver-dark);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+            line-height: 1.6;
+        }
+
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--silver-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: gap 0.3s ease;
+        }
+
+        .card-link:hover {
+            gap: 0.8rem;
+            color: var(--silver);
+        }
+
+        /* --- EMPREENDIMENTOS SECTION --- */
+        .emp-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .emp-card {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            height: 260px;
+            text-decoration: none;
+            color: white;
+            border: 1px solid var(--border-color);
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .emp-card:hover {
+            transform: translateY(-6px);
+            border-color: #4a4a4a;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .emp-card-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: transform 0.6s ease;
+        }
+
+        .emp-card:hover .emp-card-bg {
+            transform: scale(1.05);
+        }
+
+        .emp-card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to top,
+                rgba(0, 0, 0, 0.9) 0%,
+                rgba(0, 0, 0, 0.4) 50%,
+                rgba(0, 0, 0, 0.2) 100%
+            );
+        }
+
+        .emp-card-content {
+            position: relative;
+            z-index: 2;
+            padding: 1.8rem;
+            width: 100%;
+        }
+
+        .emp-card-content h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .emp-card-content span {
+            font-size: 0.8rem;
+            color: var(--silver);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .emp-card-arrow {
+            position: absolute;
+            right: 1.8rem;
+            bottom: 1.8rem;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(192, 192, 192, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--silver-light);
+            transition: all 0.3s ease;
+            z-index: 3;
+        }
+
+        .emp-card:hover .emp-card-arrow {
+            background: var(--gradient-silver-subtle);
+            color: #0a0a0a;
+        }
+
+        /* --- INSTAGRAM SECTION --- */
+        .ig-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .ig-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 1.3rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .ig-card:hover {
+            border-color: #E1306C;
+            background: #1a1014;
+            transform: translateY(-4px);
+        }
+
+        .ig-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .ig-info h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.15rem;
+        }
+
+        .ig-info span {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* --- STATS --- */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            padding: 3rem 5%;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            max-width: 1400px;
+            margin: 0 auto 2rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            background: var(--gradient-silver);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 0.3rem;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 3rem 5%;
+            border-top: 1px solid var(--border-color);
+            margin-top: 4rem;
+        }
+
+        footer .footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            background: var(--gradient-silver);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        footer p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        footer a {
+            color: var(--silver-light);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* --- ANIMATIONS --- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            section {
+                padding: 4rem 5%;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            .emp-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .btn-outline {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+            .stats-bar {
+                gap: 2rem;
+            }
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 1rem;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav id="navbar">
+        <div class="logo-container">
+            <img
+                class="logo-img"
+                src="https://collinaditalia.com.br/wp-content/uploads/2025/06/v1-1.png"
+                alt="Collina d'Italia"
+            >
+        </div>
+        <ul class="nav-links">
+            <li><a href="#midia">Na Mídia</a></li>
+            <li><a href="#empreendimentos">Nosso Ecossistema</a></li>
+            <li><a href="#redes">Redes Sociais</a></li>
+            <li><a href="https://collinaditalia.com.br/" target="_blank">Site Oficial</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-pattern"></div>
+
+        <div class="hero-content">
+            <p class="hero-subtitle">Grupo CSX</p>
+            <h1>Referência em <span>Multipropriedade</span><br>e Turismo de Luxo</h1>
+            <p>Reconhecidos pelos principais veículos de comunicação do país pela nossa atuação estratégica no mercado imobiliário e hoteleiro de alto padrão.</p>
+            <a href="https://collinaditalia.com.br/" target="_blank" class="btn-primary">Conheça Nosso Projeto</a>
+            <a href="#empreendimentos" class="btn-outline">Ver Nosso Ecossistema</a>
+        </div>
+
+        <div class="scroll-indicator">
+            <span>Role para baixo</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </header>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="stat-item">
+            <div class="stat-number">R$ 927 Bi</div>
+            <div class="stat-label">em VGV no Setor</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">+166%</div>
+            <div class="stat-label">Crescimento</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">30+</div>
+            <div class="stat-label">Empresas do Grupo</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">R$ 79 Bi</div>
+            <div class="stat-label">em Vendas no País</div>
+        </div>
+    </div>
+
+    <!-- Na Mídia Section -->
+    <section id="midia">
+        <div class="section-header fade-in">
+            <p class="tag">Imprensa</p>
+            <h2>Na <span>Mídia</span></h2>
+            <p>Veja o que os principais portais de notícias e especialistas do mercado estão dizendo sobre o setor de multipropriedade e nossos projetos.</p>
+        </div>
+
+        <div class="grid">
+            <!-- G1: Missão Internacional França (18/06/2026) -->
+            <article class="card fade-in">
+                <div class="card-icon"><i class="fas fa-globe"></i></div>
+                <span class="source">G1 Globo</span>
+                <h3>CSX Holding apoia missão internacional de jovens brasileiros na França</h3>
+                <p>Delegação do programa Protagonistas do Brasil visita INTERPOL, Conselho da Europa e Embaixada do Brasil, com apoio institucional de Caio Santomo.</p>
+                <a href="https://g1.globo.com/sp/vale-do-paraiba-regiao/especial-publicitario/csx-holding-investindo-multipropriedades/noticia/2026/06/18/csx-holding-comanda-missao-internacional-de-jovens-brasileiros-na-franca.ghtml" target="_blank" class="card-link">
+                    Ler matéria <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- G1: Retrofit Campos do Jordão (11/06/2026) -->
+            <article class="card fade-in">
+                <div class="card-icon"><i class="fas fa-hammer"></i></div>
+                <span class="source">G1 Globo</span>
+                <h3>Campos do Jordão recebe novo impulso em projeto de retrofit urbano</h3>
+                <p>Caio Santomo participa de agenda na CasaCor com Léo Shehtman para discutir arquitetura, hospitalidade e revitalização de ativos imobiliários na Serra da Mantiqueira.</p>
+                <a href="https://g1.globo.com/sp/vale-do-paraiba-regiao/especial-publicitario/csx-holding-investindo-multipropriedades/noticia/2026/06/11/campos-do-jordao-recebe-novo-impulso-em-projeto-de-retrofit-urbano.ghtml" target="_blank" class="card-link">
+                    Ler matéria <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- G1: Londres Internacionalização (08/06/2026) -->
+            <article class="card fade-in">
+                <div class="card-icon"><i class="fas fa-handshake"></i></div>
+                <span class="source">G1 Globo</span>
+                <h3>Encontro em Londres avança estratégia de internacionalização da CSX Holding</h3>
+                <p>Caio Santomo reúne-se com Sheikh Abdullah bin Rashid Al Mualla para estruturar fundos internacionais e expandir a Monte Carlo Multipropriedade globalmente.</p>
+                <a href="https://g1.globo.com/sp/vale-do-paraiba-regiao/especial-publicitario/csx-holding-investindo-multipropriedades/noticia/2026/06/08/evento-em-londres-avanca-estrategia-de-internacionalizacao-da-csx-holding.ghtml" target="_blank" class="card-link">
+                    Ler matéria <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- G1: Nações Mall (27/05/2026) -->
+            <article class="card fade-in">
+                <div class="card-icon"><i class="fas fa-store"></i></div>
+                <span class="source">G1 Globo</span>
+                <h3>Presença que transforma: experiência no Nações Mall</h3>
+                <p>Nações Mall se consolida como referência em experiência de consumo e conveniência, integrando lazer, gastronomia e serviços em um só lugar.</p>
+                <a href="https://g1.globo.com/sp/vale-do-paraiba-regiao/especial-publicitario/csx-holding-investindo-multipropriedades/noticia/2026/05/27/presenca-que-transforma-experiencia-no-nacoes-mall.ghtml" target="_blank" class="card-link">
+                    Ler matéria <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- G1: Infoprodutos (22/05/2026) -->
+            <article class="card fade-in">
+                <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                <span class="source">G1 Globo</span>
+                <h3>Posicionamento no mercado de infoprodutos de alta performance</h3>
+                <p>CSX Holding investe em multipropriedades e marca presença em evento de infoprodutos com estratégia de alto desempenho.</p>
+                <a href="https://g1.globo.com/sp/vale-do-paraiba-regiao/especial-publicitario/csx-holding-investindo-multipropriedades/noticia/2026/05/22/posicionamento-no-mercado-de-infoprodutos-de-alta-performance-conheca-evento.ghtml" target="_blank" class="card-link">
+                    Ler matéria <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- G1: Monte Carlo Futuro Econômico (16/04/2026) -->
+            <article class="card fade-in">
+                <div class="card-icon"><i class="fas fa-microphone"></i></div>
+                <span class="source">G1 Globo</span>
+                <h3>Monte Carlo Multipropriedade participa de encontro sobre o futuro econômico</h3>
+                <p>Monte Carlo marca presença em debate estratégico sobre os rumos da economia e o papel do setor imobiliário no desenvolvimento nacional.</p>
+                <a href="https://g1.globo.com/sp/vale-do-paraiba-regiao/especial-publicitario/csx-holding-investindo-multipropriedades/noticia/2026/04/16/monte-carlo-multipropriedade-participa-de-encontro-sobre-futuro-economico.ghtml" target="_blank" class="card-link">
+                    Ler matéria <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- G1: Brasil-Indonésia (14/04/2026) -->
+            <article class="card fade-in">
+                <div class="card-icon"><i class="fas fa-earth-americas"></i></div>
+                <span class="source">G1 Globo</span>
+                <h3>Brasil e Indonésia avançam em conexão turística com projeto Monte Carlo</h3>
+                <p>Cooperação internacional fortalece laços turísticos entre os dois países, com a Monte Carlo Multipropriedade como protagonista da iniciativa.</p>
+                <a href="https://g1.globo.com/sp/vale-do-paraiba-regiao/especial-publicitario/csx-holding-investindo-multipropriedades/noticia/2026/04/14/brasil-e-indonesia-avancam-em-conexao-turistica-com-projeto-monte-carlo.ghtml" target="_blank" class="card-link">
+                    Ler matéria <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- G1: Brasil-Macau (13/03/2026) -->
+            <article class="card fade-in">
+                <div class="card-icon"><i class="fas fa-bridge"></i></div>
+                <span class="source">G1 Globo</span>
+                <h3>CSX Holding promove encontro para discutir investimentos entre Brasil e Macau</h3>
+                <p>Encontro estratégico abre novas frentes de investimento e parcerias entre o mercado brasileiro e o dinâmico ecossistema de negócios de Macau.</p>
+                <a href="https://g1.globo.com/sp/vale-do-paraiba-regiao/especial-publicitario/csx-holding-investindo-multipropriedades/noticia/2026/03/13/csx-holding-promove-encontro-para-discutir-investimentos-entre-brasil-e-macau.ghtml" target="_blank" class="card-link">
+                    Ler matéria <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- G1: Odora Minerals PDAC (11/03/2026) -->
+            <article class="card fade-in">
+                <div class="card-icon"><i class="fas fa-gem"></i></div>
+                <span class="source">G1 Globo</span>
+                <h3>Odora Minerals leva projetos ao PDAC 2026, evento global da mineração</h3>
+                <p>Empresa do grupo CSX marca presença no principal encontro mundial da indústria mineral em Toronto, apresentando projetos de minerais estratégicos.</p>
+                <a href="https://g1.globo.com/sp/vale-do-paraiba-regiao/especial-publicitario/csx-holding-investindo-multipropriedades/noticia/2026/03/11/odora-minerals-leva-projetos-ao-pdac-2026-evento-global-da-mineracao.ghtml" target="_blank" class="card-link">
+                    Ler matéria <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- G1: Monte Carlo Novo Movimento (05/03/2026) -->
+            <article class="card fade-in">
+                <div class="card-icon"><i class="fas fa-chess-knight"></i></div>
+                <span class="source">G1 Globo</span>
+                <h3>Novo movimento de investimento da Monte Carlo Incorporadora & Multipropriedade</h3>
+                <p>Monte Carlo anuncia nova fase de investimentos estratégicos, ampliando sua atuação no mercado de multipropriedade e desenvolvimento imobiliário.</p>
+                <a href="https://g1.globo.com/sp/vale-do-paraiba-regiao/especial-publicitario/csx-holding-investindo-multipropriedades/noticia/2026/03/05/novo-movimento-de-investimento-da-monte-carlo-incorporadora-and-multipropriedade.ghtml" target="_blank" class="card-link">
+                    Ler matéria <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- G1: Axion Real Estate (27/02/2026) -->
+            <article class="card fade-in">
+                <div class="card-icon"><i class="fas fa-cubes"></i></div>
+                <span class="source">G1 Globo</span>
+                <h3>Axion Real Estate lança seu poderoso sistema imobiliário</h3>
+                <p>CSX Holding consolida novo padrão de real estate integrado com governança, desenvolvimento e operação sob liderança de Pedro Monforte.</p>
+                <a href="https://g1.globo.com/sp/vale-do-paraiba-regiao/especial-publicitario/csx-holding-investindo-multipropriedades/noticia/2026/02/27/axion-real-estate-lanca-seu-poderoso-sistema-imobiliario.ghtml" target="_blank" class="card-link">
+                    Ler matéria <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- G1: CSX Tech (27/02/2026) -->
+            <article class="card fade-in">
+                <div class="card-icon"><i class="fas fa-microchip"></i></div>
+                <span class="source">G1 Globo</span>
+                <h3>CSX Tech nasce para redefinir o mercado global de tecnologia</h3>
+                <p>Nova vertical do grupo reúne DataZ, desenvolvimento de sistemas e cibersegurança sob a liderança do CTO Victor Fortinati para atuação internacional.</p>
+                <a href="https://g1.globo.com/sp/vale-do-paraiba-regiao/especial-publicitario/csx-holding-investindo-multipropriedades/noticia/2026/02/27/csx-tech-nasce-para-redefinir-o-mercado-global-de-tecnologia.ghtml" target="_blank" class="card-link">
+                    Ler matéria <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- G1: CSX Holding Multipropriedade (22/12/2025) -->
+            <article class="card fade-in">
+                <div class="card-icon"><i class="fas fa-newspaper"></i></div>
+                <span class="source">G1 Globo</span>
+                <h3>CSX Holding aposta na multipropriedade para impulsionar o turismo</h3>
+                <p>Grupo aposta em modelo inovador de multipropriedade para atrair investimentos e fortalecer o turismo na região do Vale do Paraíba.</p>
+                <a href="https://g1.globo.com/sp/vale-do-paraiba-regiao/especial-publicitario/csx-holding/noticia/2025/12/22/csx-holding-aposta-na-multipropriedade-para-impulsionar-turismo.ghtml" target="_blank" class="card-link">
+                    Ler matéria <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- Veja -->
+            <article class="card fade-in">
+                <div class="card-icon"><i class="fas fa-chart-bar"></i></div>
+                <span class="source">Revista Veja</span>
+                <h3>Valor de venda de multipropriedade chega a R$ 79 bi no país</h3>
+                <p>Estudo mostra a força e a maturidade do mercado de multipropriedade no Brasil, com números expressivos de crescimento.</p>
+                <a href="https://veja.abril.com.br/coluna/radar/valor-de-venda-de-multipropriedade-chega-a-r-79-bi-no-pais-mostra-estudo/" target="_blank" class="card-link">
+                    Ler matéria <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- Estadão -->
+            <article class="card fade-in">
+                <div class="card-icon"><i class="fas fa-building"></i></div>
+                <span class="source">O Estado de S. Paulo</span>
+                <h3>Multipropriedade cresce 17% e movimenta R$ 283 bilhões</h3>
+                <p>Setor imobiliário consolida a multipropriedade como tendência definitiva no mercado brasileiro de alto padrão.</p>
+                <a href="https://imoveis.estadao.com.br/noticias/imoveis-multipropriedade-crescem-17-no-brasil-e-movimentam-r-283-bilhoes/" target="_blank" class="card-link">
+                    Ler matéria <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- Desbravador -->
+            <article class="card fade-in">
+                <div class="card-icon"><i class="fas fa-mountain"></i></div>
+                <span class="source">Desbravador</span>
+                <h3>Cenário do desenvolvimento de multipropriedades no Brasil</h3>
+                <p>Análise completa sobre o crescimento e as oportunidades do mercado de multipropriedade nas principais regiões turísticas.</p>
+                <a href="https://www.desbravador.com.br/novidades/noticias/cenario-do-desenvolvimento-de-multipropriedades-no-brasil" target="_blank" class="card-link">
+                    Ler matéria <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- Jusbrasil -->
+            <article class="card fade-in">
+                <div class="card-icon"><i class="fas fa-balance-scale"></i></div>
+                <span class="source">Jusbrasil</span>
+                <h3>Multipropriedade no Brasil: tendências e desafios</h3>
+                <p>Segurança jurídica, inovações legislativas e os desafios para os próximos anos do mercado imobiliário.</p>
+                <a href="https://www.jusbrasil.com.br/artigos/multipropriedade-no-brasil-tendencias-e-desafios/2655703045" target="_blank" class="card-link">
+                    Ler matéria <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- JC UOL -->
+            <article class="card fade-in">
+                <div class="card-icon"><i class="fas fa-coins"></i></div>
+                <span class="source">Jornal do Commercio</span>
+                <h3>Multipropriedade cresce 166% e alcança R$ 927 bilhões em VGV</h3>
+                <p>Recorde histórico no setor de hospedagem comprova a solidez e o potencial de crescimento do segmento.</p>
+                <a href="https://jc.uol.com.br/colunas/metro-quadrado/2025/06/13/multipropriedade-cresce-166-e-alcanca-rs-927-bilhoes-em-vgv.html" target="_blank" class="card-link">
+                    Ler matéria <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+        </div>
+    </section>
+
+    <!-- Nosso Ecossistema -->
+    <section id="empreendimentos">
+        <div class="section-header fade-in">
+            <p class="tag">Grupo CSX</p>
+            <h2>Nosso <span>Ecossistema</span></h2>
+            <p>Conheça as empresas e projetos que fazem parte do ecossistema CSX Holding, referência em multipropriedade e desenvolvimento imobiliário.</p>
+        </div>
+
+        <div class="emp-grid">
+            <!-- Romantik Dalen -->
+            <a href="https://romantikdalen.com.br/" target="_blank" class="emp-card fade-in">
+                <div
+                    class="emp-card-bg"
+                    style="background-image: url('https://images.builderservices.io/s/cdn/v1.0/i/m?url=https%3A%2F%2Fstorage.googleapis.com%2Fproduction-hostgator-brasil-v1-0-6%2F646%2F1337646%2FVbAz5scB%2F1fe7476ca20d41069b30cc3a1d4d35c4&methods=resize%2C500%2C5000');"
+                ></div>
+                <div class="emp-card-overlay"></div>
+                <div class="emp-card-content">
+                    <h4>Romantik Dalen</h4>
+                    <span>Parque Temático Romântico</span>
+                </div>
+                <div class="emp-card-arrow"><i class="fas fa-arrow-right"></i></div>
+            </a>
+
+            <!-- Nações Mall CJ -->
+            <a href="https://nacoesmallcj.com.br/" target="_blank" class="emp-card fade-in">
+                <div
+                    class="emp-card-bg"
+                    style="background-image: url('https://nacoesmallcj.com.br/wp-content/uploads/2025/12/VZ01.png');"
+                ></div>
+                <div class="emp-card-overlay"></div>
+                <div class="emp-card-content">
+                    <h4>Nações Mall CJ</h4>
+                    <span>Open Mall Premium · Campos do Jordão</span>
+                </div>
+                <div class="emp-card-arrow"><i class="fas fa-arrow-right"></i></div>
+            </a>
+
+            <!-- Nações Mall -->
+            <a href="https://nacoesmall.com/" target="_blank" class="emp-card fade-in">
+                <div
+                    class="emp-card-bg"
+                    style="background-image: url('https://images.builderservices.io/s/cdn/v1.0/i/m?url=https%3A%2F%2Fstorage.googleapis.com%2Fproduction-hostgator-brasil-v1-0-3%2F783%2F1329783%2FoHoNAWkE%2F90c2cdf369fb4b0cb83e420a71e861d7&methods=resize%2C500%2C5000');"
+                ></div>
+                <div class="emp-card-overlay"></div>
+                <div class="emp-card-content">
+                    <h4>Nações Mall</h4>
+                    <span>Shopping · São José dos Campos</span>
+                </div>
+                <div class="emp-card-arrow"><i class="fas fa-arrow-right"></i></div>
+            </a>
+
+            <!-- CSX Holding -->
+            <a href="https://csxholding.com.br/" target="_blank" class="emp-card fade-in">
+                <div
+                    class="emp-card-bg"
+                    style="background-image: url('https://csxholding.com.br/wp-content/uploads/2025/06/da.png');"
+                ></div>
+                <div class="emp-card-overlay"></div>
+                <div class="emp-card-content">
+                    <h4>CSX Holding</h4>
+                    <span>Estratégia e Inovação Corporativa</span>
+                </div>
+                <div class="emp-card-arrow"><i class="fas fa-arrow-right"></i></div>
+            </a>
+
+            <!-- CSX Real Estate -->
+            <a href="https://csxrealstate.com.br/" target="_blank" class="emp-card fade-in">
+                <div
+                    class="emp-card-bg"
+                    style="background-image: url('https://csxholding.com.br/wp-content/uploads/2025/09/realstate.png');"
+                ></div>
+                <div class="emp-card-overlay"></div>
+                <div class="emp-card-content">
+                    <h4>CSX Real Estate</h4>
+                    <span>Gestão Imobiliária Institucional</span>
+                </div>
+                <div class="emp-card-arrow"><i class="fas fa-arrow-right"></i></div>
+            </a>
+
+            <!-- Mineralis -->
+            <a href="https://mineralisorg.com.br/" target="_blank" class="emp-card fade-in">
+                <div
+                    class="emp-card-bg"
+                    style="background-image: url('https://mineralisorg.com.br/wp-content/uploads/2025/08/Icone-de-Perfil-Mineralis_Prancheta-1.png');"
+                ></div>
+                <div class="emp-card-overlay"></div>
+                <div class="emp-card-content">
+                    <h4>Mineralis</h4>
+                    <span>Monetização de Ativos Minerais</span>
+                </div>
+                <div class="emp-card-arrow"><i class="fas fa-arrow-right"></i></div>
+            </a>
+        </div>
+    </section>
+
     <!-- Instagram Section -->
     <section id="redes">
         <div class="section-header fade-in">
@@ -7,16 +1054,6 @@
         </div>
 
         <div class="ig-grid">
-            <!-- Collina d'Italia (perfil principal) -->
-            <a href="https://www.instagram.com/collinaditalia/" target="_blank" class="ig-card fade-in">
-                <div class="ig-icon"><i class="fab fa-instagram"></i></div>
-                <div class="ig-info">
-                    <h4>Collina d'Italia</h4>
-                    <span>Perfil Oficial</span>
-                </div>
-            </a>
-
-            <!-- Tortoreto Boutique -->
             <a href="https://www.instagram.com/tortoretoboutique/" target="_blank" class="ig-card fade-in">
                 <div class="ig-icon"><i class="fab fa-instagram"></i></div>
                 <div class="ig-info">
@@ -25,7 +1062,6 @@
                 </div>
             </a>
 
-            <!-- Baumgart Hotel -->
             <a href="https://www.instagram.com/baumgart_hotel/" target="_blank" class="ig-card fade-in">
                 <div class="ig-icon"><i class="fab fa-instagram"></i></div>
                 <div class="ig-info">
@@ -34,97 +1070,6 @@
                 </div>
             </a>
 
-            <!-- Romantik Dalen -->
-            <a href="https://www.instagram.com/romantikdalen/" target="_blank" class="ig-card fade-in">
-                <div class="ig-icon"><i class="fab fa-instagram"></i></div>
-                <div class="ig-info">
-                    <h4>Romantik Dalen</h4>
-                    <span>Perfil Oficial</span>
-                </div>
-            </a>
-
-            <!-- Nações Mall CJ -->
-            <a href="https://www.instagram.com/nacoesmallcj/" target="_blank" class="ig-card fade-in">
-                <div class="ig-icon"><i class="fab fa-instagram"></i></div>
-                <div class="ig-info">
-                    <h4>Nações Mall CJ</h4>
-                    <span>Perfil Oficial</span>
-                </div>
-            </a>
-
-            <!-- Nações Mall -->
-            <a href="https://www.instagram.com/nacoesmall/" target="_blank" class="ig-card fade-in">
-                <div class="ig-icon"><i class="fab fa-instagram"></i></div>
-                <div class="ig-info">
-                    <h4>Nações Mall</h4>
-                    <span>Perfil Oficial</span>
-                </div>
-            </a>
-
-            <!-- Axion Real Estate -->
-            <a href="https://www.instagram.com/axionrealestateofc/" target="_blank" class="ig-card fade-in">
-                <div class="ig-icon"><i class="fab fa-instagram"></i></div>
-                <div class="ig-info">
-                    <h4>Axion Real Estate</h4>
-                    <span>Perfil Oficial</span>
-                </div>
-            </a>
-
-            <!-- Mineralis -->
-            <a href="https://www.instagram.com/mineralisofc/" target="_blank" class="ig-card fade-in">
-                <div class="ig-icon"><i class="fab fa-instagram"></i></div>
-                <div class="ig-info">
-                    <h4>Mineralis</h4>
-                    <span>Perfil Oficial</span>
-                </div>
-            </a>
-
-            <!-- Fontana d'Italia -->
-            <a href="https://www.instagram.com/fontanaditalia/" target="_blank" class="ig-card fade-in">
-                <div class="ig-icon"><i class="fab fa-instagram"></i></div>
-                <div class="ig-info">
-                    <h4>Fontana d'Italia</h4>
-                    <span>Perfil Oficial</span>
-                </div>
-            </a>
-
-            <!-- Horizon Share -->
-            <a href="https://www.instagram.com/horizonshareofc/" target="_blank" class="ig-card fade-in">
-                <div class="ig-icon"><i class="fab fa-instagram"></i></div>
-                <div class="ig-info">
-                    <h4>Horizon Share</h4>
-                    <span>Perfil Oficial</span>
-                </div>
-            </a>
-
-            <!-- Horizon One -->
-            <a href="https://www.instagram.com/horizononeofc/" target="_blank" class="ig-card fade-in">
-                <div class="ig-icon"><i class="fab fa-instagram"></i></div>
-                <div class="ig-info">
-                    <h4>Horizon One</h4>
-                    <span>Perfil Oficial</span>
-                </div>
-            </a>
-
-            <!-- Horizon Pass -->
-            <a href="https://www.instagram.com/horizonpassofc/" target="_blank" class="ig-card fade-in">
-                <div class="ig-icon"><i class="fab fa-instagram"></i></div>
-                <div class="ig-info">
-                    <h4>Horizon Pass</h4>
-                    <span>Perfil Oficial</span>
-                </div>
-            </a>
-
-            <!-- Capital Fractions -->
-            <a href="https://www.instagram.com/capitalfractions/" target="_blank" class="ig-card fade-in">
-                <div class="ig-icon"><i class="fab fa-instagram"></i></div>
-                <div class="ig-info">
-                    <h4>Capital Fractions</h4>
-                    <span>Perfil Oficial</span>
-                </div>
-            </a>
-
-            <!-- Reels e Posts em Destaque -->
             <a href="https://www.instagram.com/reel/DWj4z0zjg_Z/" target="_blank" class="ig-card fade-in">
                 <div class="ig-icon"><i class="fas fa-play"></i></div>
                 <div class="ig-info">
@@ -182,3 +1127,41 @@
             </a>
         </div>
     </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">Collina d'Italia</div>
+        <p>&copy; 2026 Collina d'Italia · Grupo CSX Holding. Todos os direitos reservados. | <a href="https://collinaditalia.com.br/" target="_blank">Site Oficial</a></p>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Animação de fade-in ao rolar a página
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
