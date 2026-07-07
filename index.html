@@ -3,24 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Capital Fractions | Multipropriedade Inteligente</title>
+    <title>Collina d'Italia | Credibilidade e Referência em Multipropriedade</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
-            --primary: #0a0a0a;
-            --secondary: #1a1a2e;
-            --accent: #c9a84c;
-            --accent-light: #e8d28c;
-            --text: #ffffff;
-            --text-muted: #a0a0a0;
-            --bg-dark: #050505;
-            --bg-section: #0d0d0d;
+            --bg-primary: #050505;
+            --bg-secondary: #0d0d0d;
             --bg-card: #141414;
-            --gradient-gold: linear-gradient(135deg, #c9a84c, #e8d28c, #c9a84c);
-            --gradient-dark: linear-gradient(180deg, #0a0a0a, #1a1a2e);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --gradient-silver: linear-gradient(135deg, #A8A8A8 0%, #E8E8E8 25%, #C0C0C0 50%, #F0F0F0 75%, #B0B0B0 100%);
+            --gradient-silver-subtle: linear-gradient(135deg, #8A8A8A 0%, #C8C8C8 50%, #9A9A9A 100%);
+            --gradient-dark: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+            --border-color: #2a2a2a;
+            --silver: #C0C0C0;
+            --silver-light: #E8E8E8;
+            --silver-dark: #8A8A8A;
         }
 
         * {
@@ -35,163 +36,163 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text);
-            overflow-x: hidden;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* ===== NAVBAR ===== */
-        .navbar {
+        /* --- NAVBAR --- */
+        nav {
             position: fixed;
             top: 0;
-            left: 0;
             width: 100%;
-            z-index: 1000;
-            padding: 20px 60px;
+            padding: 1rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: all 0.4s ease;
-            background: transparent;
-        }
-
-        .navbar.scrolled {
-            background: rgba(5, 5, 5, 0.95);
-            backdrop-filter: blur(20px);
-            padding: 15px 60px;
-            box-shadow: 0 2px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        .navbar-logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--accent);
-            text-decoration: none;
-            letter-spacing: 1px;
-        }
-
-        .navbar-logo span {
-            color: var(--text);
-            font-weight: 300;
-        }
-
-        .navbar-links {
-            display: flex;
-            gap: 35px;
-            list-style: none;
-        }
-
-        .navbar-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .navbar-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        .navbar-links a:hover {
-            color: var(--accent);
-        }
-
-        .navbar-links a:hover::after {
-            width: 100%;
-        }
-
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            z-index: 1001;
-        }
-
-        .menu-toggle span {
-            width: 25px;
-            height: 2px;
-            background: var(--accent);
+            z-index: 1000;
+            background: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
             transition: all 0.3s ease;
         }
 
-        /* ===== HERO ===== */
-        .hero {
-            height: 100vh;
+        nav.scrolled {
+            padding: 0.7rem 5%;
+            background: rgba(5, 5, 5, 0.95);
+        }
+
+        .logo-container {
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .logo-img {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            letter-spacing: 0.5px;
             position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gradient-silver);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--silver-light);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            background: var(--bg-primary);
             overflow: hidden;
-            background: var(--gradient-dark);
         }
 
-        .hero::before {
-            content: '';
+        .hero-bg {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80') center/cover no-repeat;
-            opacity: 0.15;
+            background-image: url('COLE_AQUI_O_LINK_DA_SUA_IMAGEM_DE_FUNDO');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.3;
+            z-index: 0;
         }
 
-        .hero::after {
-            content: '';
+        .hero-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(ellipse at center, transparent 0%, var(--bg-dark) 75%);
+            background: linear-gradient(
+                to bottom,
+                rgba(5, 5, 5, 0.7) 0%,
+                rgba(5, 5, 5, 0.5) 40%,
+                rgba(5, 5, 5, 0.8) 80%,
+                rgba(5, 5, 5, 1) 100%
+            );
+            z-index: 1;
+        }
+
+        .hero-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(192, 192, 192, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(192, 192, 192, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: 1;
         }
 
         .hero-content {
             position: relative;
             z-index: 2;
-            text-align: center;
-            max-width: 900px;
-            padding: 0 30px;
+            max-width: 800px;
         }
 
-        .hero-badge {
-            display: inline-block;
-            padding: 8px 24px;
-            border: 1px solid var(--accent);
-            border-radius: 30px;
-            font-size: 0.75rem;
+        .hero-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--silver);
+            letter-spacing: 4px;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--accent);
-            margin-bottom: 30px;
-            animation: fadeInDown 1s ease;
+            margin-bottom: 1.5rem;
         }
 
         .hero h1 {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.15;
             font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: 25px;
-            animation: fadeInUp 1s ease 0.3s both;
         }
 
-        .hero h1 .highlight {
-            background: var(--gradient-gold);
+        .hero h1 span {
+            background: var(--gradient-silver);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -199,150 +200,378 @@
 
         .hero p {
             font-size: 1.15rem;
-            color: var(--text-muted);
-            max-width: 650px;
-            margin: 0 auto 40px;
-            animation: fadeInUp 1s ease 0.6s both;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 1s ease 0.9s both;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
         }
 
         .btn-primary {
-            padding: 16px 40px;
-            background: var(--gradient-gold);
-            color: var(--primary);
-            border: none;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            display: inline-block;
+            padding: 0.95rem 2.5rem;
+            background: var(--gradient-silver);
+            color: #0a0a0a;
             text-decoration: none;
+            font-weight: 700;
+            border-radius: 50px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(201, 168, 76, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(192, 192, 192, 0.25);
         }
 
-        .btn-secondary {
-            padding: 16px 40px;
+        .btn-outline {
+            display: inline-block;
+            padding: 0.85rem 2.2rem;
             background: transparent;
-            color: var(--text);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 4px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            color: var(--silver-light);
             text-decoration: none;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(192, 192, 192, 0.4);
+            margin-left: 1rem;
         }
 
-        .btn-secondary:hover {
-            border-color: var(--accent);
-            color: var(--accent);
+        .btn-outline:hover {
+            border-color: var(--silver);
+            background: rgba(192, 192, 192, 0.05);
+            transform: translateY(-3px);
         }
 
-        /* ===== SECTIONS ===== */
-        .section {
-            padding: 120px 60px;
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator span {
+            font-size: 0.7rem;
+            color: var(--silver-dark);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .scroll-indicator i {
+            color: var(--silver);
+            font-size: 0.9rem;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* --- SECTIONS GENERAL --- */
+        section {
+            padding: 6rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 80px;
+            margin-bottom: 4rem;
         }
 
-        .section-label {
-            display: inline-block;
-            font-size: 0.75rem;
-            text-transform: uppercase;
+        .section-header .tag {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            color: var(--silver);
             letter-spacing: 3px;
-            color: var(--accent);
-            margin-bottom: 15px;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
         }
 
-        .section-title {
+        .section-header h2 {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 4vw, 3.2rem);
-            font-weight: 700;
-            margin-bottom: 20px;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1rem;
         }
 
-        .section-subtitle {
-            font-size: 1.05rem;
-            color: var(--text-muted);
+        .section-header h2 span {
+            background: var(--gradient-silver);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
             max-width: 600px;
             margin: 0 auto;
         }
 
-        /* ===== ABOUT ===== */
-        .about {
-            background: var(--bg-section);
-        }
-
-        .about-grid {
+        /* --- CARDS GRID --- */
+        .grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.8rem;
         }
 
-        .about-image {
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
-            border-radius: 8px;
             overflow: hidden;
-            aspect-ratio: 4/5;
+            display: flex;
+            flex-direction: column;
         }
 
-        .about-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .about-image::after {
+        .card::before {
             content: '';
             position: absolute;
-            top: 20px;
-            left: 20px;
-            right: -20px;
-            bottom: -20px;
-            border: 1px solid var(--accent);
-            border-radius: 8px;
-            z-index: -1;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gradient-silver);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
         }
 
-        .about-text h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            margin-bottom: 25px;
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: #3a3a3a;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
         }
 
-        .about-text p {
-            color: var(--text-muted);
-            margin-bottom: 20px;
-            font-size: 1rem;
-            line-height: 1.8;
+        .card:hover::before {
+            transform: scaleX(1);
         }
 
-        .about-stats {
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(192, 192, 192, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.3rem;
+            font-size: 1.3rem;
+            color: var(--silver);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .card .source {
+            font-size: 0.8rem;
+            color: var(--silver-dark);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+            line-height: 1.6;
+        }
+
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--silver-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: gap 0.3s ease;
+        }
+
+        .card-link:hover {
+            gap: 0.8rem;
+            color: var(--silver);
+        }
+
+        /* --- EMPREENDIMENTOS SECTION --- */
+        .emp-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .emp-card {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            height: 260px;
+            text-decoration: none;
+            color: white;
+            border: 1px solid var(--border-color);
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .emp-card:hover {
+            transform: translateY(-6px);
+            border-color: #4a4a4a;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .emp-card-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: transform 0.6s ease;
+        }
+
+        .emp-card:hover .emp-card-bg {
+            transform: scale(1.05);
+        }
+
+        .emp-card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to top,
+                rgba(0, 0, 0, 0.9) 0%,
+                rgba(0, 0, 0, 0.4) 50%,
+                rgba(0, 0, 0, 0.2) 100%
+            );
+        }
+
+        .emp-card-content {
+            position: relative;
+            z-index: 2;
+            padding: 1.8rem;
+            width: 100%;
+        }
+
+        .emp-card-content h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .emp-card-content span {
+            font-size: 0.8rem;
+            color: var(--silver);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .emp-card-arrow {
+            position: absolute;
+            right: 1.8rem;
+            bottom: 1.8rem;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(192, 192, 192, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--silver-light);
+            transition: all 0.3s ease;
+            z-index: 3;
+        }
+
+        .emp-card:hover .emp-card-arrow {
+            background: var(--gradient-silver-subtle);
+            color: #0a0a0a;
+        }
+
+        /* --- INSTAGRAM SECTION --- */
+        .ig-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .ig-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 1.3rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .ig-card:hover {
+            border-color: #E1306C;
+            background: #1a1014;
+            transform: translateY(-4px);
+        }
+
+        .ig-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .ig-info h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.15rem;
+        }
+
+        .ig-info span {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* --- STATS --- */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            padding: 3rem 5%;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            max-width: 1400px;
+            margin: 0 auto 2rem;
+            flex-wrap: wrap;
         }
 
         .stat-item {
@@ -350,476 +579,60 @@
         }
 
         .stat-number {
+            font-family: 'Playfair Display', serif;
             font-size: 2.5rem;
-            font-weight: 800;
-            background: var(--gradient-gold);
+            background: var(--gradient-silver);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            font-weight: 700;
         }
 
         .stat-label {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
             letter-spacing: 1px;
-            margin-top: 5px;
+            text-transform: uppercase;
+            margin-top: 0.3rem;
         }
 
-        /* ===== ECOSYSTEM ===== */
-        .ecosystem {
-            background: var(--bg-dark);
-        }
-
-        .ecosystem-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .eco-card {
-            background: var(--bg-card);
-            border: 1px solid rgba(201, 168, 76, 0.1);
-            border-radius: 12px;
-            padding: 40px 30px;
+        /* --- FOOTER --- */
+        footer {
             text-align: center;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
+            padding: 3rem 5%;
+            border-top: 1px solid var(--border-color);
+            margin-top: 4rem;
         }
 
-        .eco-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: var(--gradient-gold);
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
-        }
-
-        .eco-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .eco-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(201, 168, 76, 0.3);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-        }
-
-        .eco-icon {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            background: rgba(201, 168, 76, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 25px;
-            font-size: 1.5rem;
-            color: var(--accent);
-        }
-
-        .eco-card h4 {
-            font-size: 1.2rem;
-            margin-bottom: 12px;
-            font-weight: 600;
-        }
-
-        .eco-card p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            line-height: 1.7;
-        }
-
-        /* ===== HORIZONS / MULTIPROPRIEDADE ===== */
-        .horizons {
-            background: var(--bg-section);
-            position: relative;
-        }
-
-        .horizons-hero-image {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto 60px;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
-        }
-
-        .horizons-hero-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .horizons-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .horizon-card {
-            background: var(--bg-card);
-            border: 1px solid rgba(201, 168, 76, 0.1);
-            border-radius: 16px;
-            overflow: hidden;
-            transition: all 0.4s ease;
-        }
-
-        .horizon-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(201, 168, 76, 0.4);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
-        }
-
-        .horizon-card-image {
-            width: 100%;
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .horizon-card-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .horizon-card:hover .horizon-card-image img {
-            transform: scale(1.05);
-        }
-
-        .horizon-card-content {
-            padding: 30px;
-        }
-
-        .horizon-card-content h4 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            margin-bottom: 12px;
-            color: var(--accent);
-        }
-
-        .horizon-card-content p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            line-height: 1.7;
-        }
-
-        /* ===== SERVICES ===== */
-        .services {
-            background: var(--bg-dark);
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .service-card {
-            background: var(--bg-card);
-            border-radius: 12px;
-            padding: 50px 40px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.4s ease;
-            position: relative;
-        }
-
-        .service-card:hover {
-            border-color: rgba(201, 168, 76, 0.2);
-            transform: translateY(-5px);
-        }
-
-        .service-number {
-            font-size: 3rem;
-            font-weight: 900;
-            background: var(--gradient-gold);
+        footer .footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            background: var(--gradient-silver);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            opacity: 0.3;
-            margin-bottom: 20px;
+            margin-bottom: 1rem;
         }
 
-        .service-card h4 {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        .service-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.7;
-        }
-
-        /* ===== NA MIDIA ===== */
-        .midia {
-            background: var(--bg-section);
-        }
-
-        .midia-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .midia-card {
-            background: var(--bg-card);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.4s ease;
-        }
-
-        .midia-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(201, 168, 76, 0.2);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-        }
-
-        .midia-card-image {
-            width: 100%;
-            height: 200px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .midia-card-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .midia-card:hover .midia-card-image img {
-            transform: scale(1.05);
-        }
-
-        .midia-card-badge {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: var(--accent);
-            color: var(--primary);
-            padding: 4px 12px;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .midia-card-content {
-            padding: 30px;
-        }
-
-        .midia-card-source {
-            font-size: 0.75rem;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-
-        .midia-card-content h4 {
-            font-size: 1.1rem;
-            margin-bottom: 12px;
-            font-weight: 600;
-            line-height: 1.4;
-        }
-
-        .midia-card-content p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .midia-card-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--accent);
-            text-decoration: none;
+        footer p {
+            color: var(--text-secondary);
             font-size: 0.85rem;
-            font-weight: 600;
-            transition: gap 0.3s ease;
         }
 
-        .midia-card-link:hover {
-            gap: 12px;
-        }
-
-        /* ===== CTA ===== */
-        .cta {
-            background: var(--bg-dark);
-            text-align: center;
-            padding: 120px 60px;
-            position: relative;
-        }
-
-        .cta::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(201, 168, 76, 0.05) 0%, transparent 70%);
-            border-radius: 50%;
-        }
-
-        .cta h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 4vw, 3rem);
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        .cta p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            max-width: 550px;
-            margin: 0 auto 40px;
-            position: relative;
-        }
-
-        /* ===== FOOTER ===== */
-        .footer {
-            background: var(--primary);
-            padding: 80px 60px 40px;
-            border-top: 1px solid rgba(201, 168, 76, 0.1);
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 60px;
-            max-width: 1200px;
-            margin: 0 auto 60px;
-        }
-
-        .footer-brand {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            color: var(--accent);
-            margin-bottom: 20px;
-        }
-
-        .footer-brand span {
-            color: var(--text);
-            font-weight: 300;
-        }
-
-        .footer-desc {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            line-height: 1.7;
-            margin-bottom: 25px;
-        }
-
-        .footer-social {
-            display: flex;
-            gap: 15px;
-        }
-
-        .footer-social a {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-muted);
-            transition: all 0.3s ease;
+        footer a {
+            color: var(--silver-light);
             text-decoration: none;
         }
 
-        .footer-social a:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            transform: translateY(-3px);
+        footer a:hover {
+            text-decoration: underline;
         }
 
-        .footer-col h5 {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 25px;
-            color: var(--text);
-        }
-
-        .footer-col ul {
-            list-style: none;
-        }
-
-        .footer-col ul li {
-            margin-bottom: 12px;
-        }
-
-        .footer-col ul li a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.3s ease;
-        }
-
-        .footer-col ul li a:hover {
-            color: var(--accent);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 40px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            color: var(--text-muted);
-            font-size: 0.8rem;
-        }
-
-        /* ===== ANIMATIONS ===== */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
+        /* --- ANIMATIONS --- */
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.8s ease;
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
         .fade-in.visible {
@@ -827,432 +640,405 @@
             transform: translateY(0);
         }
 
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 1024px) {
-            .about-grid {
-                grid-template-columns: 1fr;
-                gap: 50px;
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
             }
-
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 40px;
+            section {
+                padding: 4rem 5%;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            .emp-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .btn-outline {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+            .stats-bar {
+                gap: 2rem;
+            }
+            .stat-number {
+                font-size: 2rem;
             }
         }
 
-        @media (max-width: 768px) {
-            .navbar {
-                padding: 15px 25px;
+        @media (max-width: 480px) {
+            .hero {
+                padding: 1rem;
             }
-
-            .navbar-links {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 70%;
-                height: 100vh;
-                background: rgba(10, 10, 10, 0.98);
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                gap: 30px;
-                transition: right 0.4s ease;
+            .hero h1 {
+                font-size: 1.8rem;
             }
-
-            .navbar-links.active {
-                right: 0;
-            }
-
-            .menu-toggle {
-                display: flex;
-            }
-
-            .section {
-                padding: 80px 25px;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .about-stats {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 15px;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .midia-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            .horizons-grid {
-                grid-template-columns: 1fr;
+            .hero p {
+                font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- NAVBAR -->
-    <nav class="navbar" id="navbar">
-        <a href="#" class="navbar-logo">Capital <span>Fractions</span></a>
-        <ul class="navbar-links" id="navLinks">
-            <li><a href="#about">Sobre</a></li>
-            <li><a href="#ecosystem">Ecossistema</a></li>
-            <li><a href="#horizons">Multipropriedade</a></li>
-            <li><a href="#services">Serviços</a></li>
-            <li><a href="#midia">Na Mídia</a></li>
-            <li><a href="#contact">Contato</a></li>
-        </ul>
-        <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
+    <!-- Navbar -->
+    <nav id="navbar">
+        <div class="logo-container">
+            <img
+                class="logo-img"
+                src="https://collinaditalia.com.br/wp-content/uploads/2025/06/v1-1.png"
+                alt="Collina d'Italia"
+            >
         </div>
+        <ul class="nav-links">
+            <li><a href="#midia">Na Mídia</a></li>
+            <li><a href="#empreendimentos">Nosso Ecossistema</a></li>
+            <li><a href="#redes">Redes Sociais</a></li>
+            <li><a href="https://collinaditalia.com.br/" target="_blank">Site Oficial</a></li>
+        </ul>
     </nav>
 
-    <!-- HERO -->
-    <section class="hero" id="home">
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-pattern"></div>
+
         <div class="hero-content">
-            <div class="hero-badge">Multipropriedade Inteligente</div>
-            <h1>Invista no futuro do <span class="highlight">Real Estate</span> brasileiro</h1>
-            <p>Estruturação, gestão e comercialização de ativos imobiliários com tecnologia, governança e escala. Conectamos empreendimentos, investidores e mercado em um ecossistema de alto desempenho.</p>
-            <div class="hero-buttons">
-                <a href="#ecosystem" class="btn-primary">Conheça o Ecossistema</a>
-                <a href="#contact" class="btn-secondary">Fale Conosco</a>
-            </div>
+            <p class="hero-subtitle">Grupo CSX</p>
+            <h1>Referência em <span>Multipropriedade</span><br>e Turismo de Luxo</h1>
+            <p>Reconhecidos pelos principais veículos de comunicação do país pela nossa atuação estratégica no mercado imobiliário e hoteleiro de alto padrão.</p>
+            <a href="https://collinaditalia.com.br/" target="_blank" class="btn-primary">Conheça Nosso Projeto</a>
+            <a href="#empreendimentos" class="btn-outline">Ver Nosso Ecossistema</a>
+        </div>
+
+        <div class="scroll-indicator">
+            <span>Role para baixo</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </header>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="stat-item">
+            <div class="stat-number">R$ 927 Bi</div>
+            <div class="stat-label">em VGV no Setor</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">+166%</div>
+            <div class="stat-label">Crescimento</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">30+</div>
+            <div class="stat-label">Empresas do Grupo</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">R$ 79 Bi</div>
+            <div class="stat-label">em Vendas no País</div>
+        </div>
+    </div>
+
+    <!-- Na Mídia Section -->
+    <section id="midia">
+        <div class="section-header fade-in">
+            <p class="tag">Imprensa</p>
+            <h2>Na <span>Mídia</span></h2>
+            <p>Veja o que os principais portais de notícias e especialistas do mercado estão dizendo sobre o setor de multipropriedade e nossos projetos.</p>
+        </div>
+
+        <div class="grid">
+            <!-- Card 1: G1 - CSX Holding -->
+            <article class="card fade-in">
+                <div class="card-icon"><i class="fas fa-newspaper"></i></div>
+                <span class="source">G1 Globo</span>
+                <h3>CSX Holding aposta na multipropriedade para impulsionar o turismo</h3>
+                <p>Grupo aposta em modelo inovador de multipropriedade para atrair investimentos e fortalecer o turismo na região do Vale do Paraíba.</p>
+                <a href="https://g1.globo.com/sp/vale-do-paraiba-regiao/especial-publicitario/csx-holding/noticia/2025/12/22/csx-holding-aposta-na-multipropriedade-para-impulsionar-turismo.ghtml" target="_blank" class="card-link">
+                    Ler matéria <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- Card 2: G1 - Infoprodutos -->
+            <article class="card fade-in">
+                <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+                <span class="source">G1 Globo</span>
+                <h3>Posicionamento no mercado de infoprodutos de alta performance</h3>
+                <p>CSX Holding investe em multipropriedades e marca presença em evento de infoprodutos com estratégia de alto desempenho.</p>
+                <a href="https://g1.globo.com/sp/vale-do-paraiba-regiao/especial-publicitario/csx-holding-investindo-multipropriedades/noticia/2026/05/22/posicionamento-no-mercado-de-infoprodutos-de-alta-performance-conheca-evento.ghtml" target="_blank" class="card-link">
+                    Ler matéria <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- Card 3: Veja -->
+            <article class="card fade-in">
+                <div class="card-icon"><i class="fas fa-chart-bar"></i></div>
+                <span class="source">Revista Veja</span>
+                <h3>Valor de venda de multipropriedade chega a R$ 79 bi no país</h3>
+                <p>Estudo mostra a força e a maturidade do mercado de multipropriedade no Brasil, com números expressivos de crescimento.</p>
+                <a href="https://veja.abril.com.br/coluna/radar/valor-de-venda-de-multipropriedade-chega-a-r-79-bi-no-pais-mostra-estudo/" target="_blank" class="card-link">
+                    Ler matéria <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- Card 4: Estadão -->
+            <article class="card fade-in">
+                <div class="card-icon"><i class="fas fa-building"></i></div>
+                <span class="source">O Estado de S. Paulo</span>
+                <h3>Multipropriedade cresce 17% e movimenta R$ 283 bilhões</h3>
+                <p>Setor imobiliário consolida a multipropriedade como tendência definitiva no mercado brasileiro de alto padrão.</p>
+                <a href="https://imoveis.estadao.com.br/noticias/imoveis-multipropriedade-crescem-17-no-brasil-e-movimentam-r-283-bilhoes/" target="_blank" class="card-link">
+                    Ler matéria <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- Card 5: Desbravador -->
+            <article class="card fade-in">
+                <div class="card-icon"><i class="fas fa-mountain"></i></div>
+                <span class="source">Desbravador</span>
+                <h3>Cenário do desenvolvimento de multipropriedades no Brasil</h3>
+                <p>Análise completa sobre o crescimento e as oportunidades do mercado de multipropriedade nas principais regiões turísticas.</p>
+                <a href="https://www.desbravador.com.br/novidades/noticias/cenario-do-desenvolvimento-de-multipropriedades-no-brasil" target="_blank" class="card-link">
+                    Ler matéria <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- Card 6: Jusbrasil -->
+            <article class="card fade-in">
+                <div class="card-icon"><i class="fas fa-balance-scale"></i></div>
+                <span class="source">Jusbrasil</span>
+                <h3>Multipropriedade no Brasil: tendências e desafios</h3>
+                <p>Segurança jurídica, inovações legislativas e os desafios para os próximos anos do mercado imobiliário.</p>
+                <a href="https://www.jusbrasil.com.br/artigos/multipropriedade-no-brasil-tendencias-e-desafios/2655703045" target="_blank" class="card-link">
+                    Ler matéria <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
+
+            <!-- Card 7: JC UOL -->
+            <article class="card fade-in">
+                <div class="card-icon"><i class="fas fa-coins"></i></div>
+                <span class="source">Jornal do Commercio</span>
+                <h3>Multipropriedade cresce 166% e alcança R$ 927 bilhões em VGV</h3>
+                <p>Recorde histórico no setor de hospedagem comprova a solidez e o potencial de crescimento do segmento.</p>
+                <a href="https://jc.uol.com.br/colunas/metro-quadrado/2025/06/13/multipropriedade-cresce-166-e-alcanca-rs-927-bilhoes-em-vgv.html" target="_blank" class="card-link">
+                    Ler matéria <i class="fas fa-arrow-right"></i>
+                </a>
+            </article>
         </div>
     </section>
 
-    <!-- ABOUT -->
-    <section class="section about" id="about">
-        <div class="about-grid">
-            <div class="about-image fade-in">
-                <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80" alt="Capital Fractions Office">
-            </div>
-            <div class="about-text fade-in">
-                <span class="section-label">Quem Somos</span>
-                <h3>A referência em multipropriedade no Brasil</h3>
-                <p>A Capital Fractions é uma empresa global que integra estratégia, dados e tecnologia para estruturar todo o ciclo da multipropriedade com precisão, escala e método.</p>
-                <p>Com viabilidade apurada, performance comprovada e inovação contínua, garantimos eficiência, previsibilidade e resultados sustentáveis em cada etapa — do estudo inicial à experiência final do cliente.</p>
-                <div class="about-stats">
-                    <div class="stat-item">
-                        <div class="stat-number">250+</div>
-                        <div class="stat-label">Especialistas</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">R$2Bi+</div>
-                        <div class="stat-label">Em Ativos</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">15+</div>
-                        <div class="stat-label">Empreendimentos</div>
-                    </div>
+    <!-- Nosso Ecossistema -->
+    <section id="empreendimentos">
+        <div class="section-header fade-in">
+            <p class="tag">Grupo CSX</p>
+            <h2>Nosso <span>Ecossistema</span></h2>
+            <p>Conheça as empresas e projetos que fazem parte do ecossistema CSX Holding, referência em multipropriedade e desenvolvimento imobiliário.</p>
+        </div>
+
+        <div class="emp-grid">
+            <!-- Romantik Dalen -->
+            <a href="https://romantikdalen.com.br/" target="_blank" class="emp-card fade-in">
+                <div
+                    class="emp-card-bg"
+                    style="background-image: url('https://images.builderservices.io/s/cdn/v1.0/i/m?url=https%3A%2F%2Fstorage.googleapis.com%2Fproduction-hostgator-brasil-v1-0-6%2F646%2F1337646%2FVbAz5scB%2F1fe7476ca20d41069b30cc3a1d4d35c4&methods=resize%2C500%2C5000');"
+                ></div>
+                <div class="emp-card-overlay"></div>
+                <div class="emp-card-content">
+                    <h4>Romantik Dalen</h4>
+                    <span>Parque Temático Romântico</span>
                 </div>
-            </div>
+                <div class="emp-card-arrow"><i class="fas fa-arrow-right"></i></div>
+            </a>
+
+            <!-- Nações Mall CJ -->
+            <a href="https://nacoesmallcj.com.br/" target="_blank" class="emp-card fade-in">
+                <div
+                    class="emp-card-bg"
+                    style="background-image: url('https://nacoesmallcj.com.br/wp-content/uploads/2025/12/VZ01.png');"
+                ></div>
+                <div class="emp-card-overlay"></div>
+                <div class="emp-card-content">
+                    <h4>Nações Mall CJ</h4>
+                    <span>Open Mall Premium · Campos do Jordão</span>
+                </div>
+                <div class="emp-card-arrow"><i class="fas fa-arrow-right"></i></div>
+            </a>
+
+            <!-- Nações Mall -->
+            <a href="https://nacoesmall.com/" target="_blank" class="emp-card fade-in">
+                <div
+                    class="emp-card-bg"
+                    style="background-image: url('https://images.builderservices.io/s/cdn/v1.0/i/m?url=https%3A%2F%2Fstorage.googleapis.com%2Fproduction-hostgator-brasil-v1-0-3%2F783%2F1329783%2FoHoNAWkE%2F90c2cdf369fb4b0cb83e420a71e861d7&methods=resize%2C500%2C5000');"
+                ></div>
+                <div class="emp-card-overlay"></div>
+                <div class="emp-card-content">
+                    <h4>Nações Mall</h4>
+                    <span>Shopping · São José dos Campos</span>
+                </div>
+                <div class="emp-card-arrow"><i class="fas fa-arrow-right"></i></div>
+            </a>
+
+            <!-- CSX Holding -->
+            <a href="https://csxholding.com.br/" target="_blank" class="emp-card fade-in">
+                <div
+                    class="emp-card-bg"
+                    style="background-image: url('https://csxholding.com.br/wp-content/uploads/2025/06/da.png');"
+                ></div>
+                <div class="emp-card-overlay"></div>
+                <div class="emp-card-content">
+                    <h4>CSX Holding</h4>
+                    <span>Estratégia e Inovação Corporativa</span>
+                </div>
+                <div class="emp-card-arrow"><i class="fas fa-arrow-right"></i></div>
+            </a>
+
+            <!-- CSX Real Estate -->
+            <a href="https://csxrealstate.com.br/" target="_blank" class="emp-card fade-in">
+                <div
+                    class="emp-card-bg"
+                    style="background-image: url('https://csxholding.com.br/wp-content/uploads/2025/09/realstate.png');"
+                ></div>
+                <div class="emp-card-overlay"></div>
+                <div class="emp-card-content">
+                    <h4>CSX Real Estate</h4>
+                    <span>Gestão Imobiliária Institucional</span>
+                </div>
+                <div class="emp-card-arrow"><i class="fas fa-arrow-right"></i></div>
+            </a>
+
+            <!-- Mineralis -->
+            <a href="https://mineralisorg.com.br/" target="_blank" class="emp-card fade-in">
+                <div
+                    class="emp-card-bg"
+                    style="background-image: url('https://mineralisorg.com.br/wp-content/uploads/2025/08/Icone-de-Perfil-Mineralis_Prancheta-1.png');"
+                ></div>
+                <div class="emp-card-overlay"></div>
+                <div class="emp-card-content">
+                    <h4>Mineralis</h4>
+                    <span>Monetização de Ativos Minerais</span>
+                </div>
+                <div class="emp-card-arrow"><i class="fas fa-arrow-right"></i></div>
+            </a>
         </div>
     </section>
 
-    <!-- ECOSYSTEM -->
-    <section class="section ecosystem" id="ecosystem">
-        <div class="section-header">
-            <span class="section-label">Nosso Ecossistema</span>
-            <h2 class="section-title">Uma estrutura completa e integrada</h2>
-            <p class="section-subtitle">Cada área do nosso ecossistema opera de forma conectada, garantindo eficiência máxima em todo o ciclo da multipropriedade.</p>
+    <!-- Instagram Section -->
+    <section id="redes">
+        <div class="section-header fade-in">
+            <p class="tag">Redes Sociais</p>
+            <h2>Nossas <span>Redes Sociais</span></h2>
+            <p>Acompanhe nosso dia a dia, bastidores e a experiência dos nossos hóspedes e proprietários no Instagram.</p>
         </div>
-        <div class="ecosystem-grid">
-            <div class="eco-card fade-in">
-                <div class="eco-icon"><i class="fas fa-chart-line"></i></div>
-                <h4>Estruturação de Ativos</h4>
-                <p>Análise de viabilidade, modelagem financeira e estruturação jurídica completa para cada empreendimento.</p>
-            </div>
-            <div class="eco-card fade-in">
-                <div class="eco-icon"><i class="fas fa-users"></i></div>
-                <h4>Comercialização</h4>
-                <p>Mais de 250 especialistas em vendas atuando de forma estruturada em todas as etapas do processo comercial.</p>
-            </div>
-            <div class="eco-card fade-in">
-                <div class="eco-icon"><i class="fas fa-concierge-bell"></i></div>
-                <h4>Gestão de Clientes</h4>
-                <p>Pós-venda estratégico, retenção e fidelização para ampliar receita recorrente e fortalecer vínculos.</p>
-            </div>
-            <div class="eco-card fade-in">
-                <div class="eco-icon"><i class="fas fa-hotel"></i></div>
-                <h4>Hotelaria & Operações</h4>
-                <p>Gestão operacional dos empreendimentos com padrões de excelência e experiência premium.</p>
-            </div>
-            <div class="eco-card fade-in">
-                <div class="eco-icon"><i class="fas fa-shield-alt"></i></div>
-                <h4>Governança</h4>
-                <p>Framework institucional robusto que garante transparência, compliance e segurança para investidores.</p>
-            </div>
-            <div class="eco-card fade-in">
-                <div class="eco-icon"><i class="fas fa-gift"></i></div>
-                <h4>Clube de Benefícios</h4>
-                <p>Rede exclusiva de experiências, destinos e vantagens para clientes e investidores do ecossistema.</p>
-            </div>
+
+        <div class="ig-grid">
+            <a href="https://www.instagram.com/tortoretoboutique/" target="_blank" class="ig-card fade-in">
+                <div class="ig-icon"><i class="fab fa-instagram"></i></div>
+                <div class="ig-info">
+                    <h4>Tortoreto Boutique</h4>
+                    <span>Perfil Oficial</span>
+                </div>
+            </a>
+
+            <a href="https://www.instagram.com/baumgart_hotel/" target="_blank" class="ig-card fade-in">
+                <div class="ig-icon"><i class="fab fa-instagram"></i></div>
+                <div class="ig-info">
+                    <h4>Baumgart Hotel</h4>
+                    <span>Perfil Oficial</span>
+                </div>
+            </a>
+
+            <a href="https://www.instagram.com/reel/DWj4z0zjg_Z/" target="_blank" class="ig-card fade-in">
+                <div class="ig-icon"><i class="fas fa-play"></i></div>
+                <div class="ig-info">
+                    <h4>Monte Carlo com representantes do Setor de Turismo de SP</h4>
+                    <span>Ver no Instagram</span>
+                </div>
+            </a>
+
+            <a href="https://www.instagram.com/reel/DZ0xwSEyQQn/" target="_blank" class="ig-card fade-in">
+                <div class="ig-icon"><i class="fas fa-play"></i></div>
+                <div class="ig-info">
+                    <h4>Reel em Destaque</h4>
+                    <span>Ver no Instagram</span>
+                </div>
+            </a>
+
+            <a href="https://www.instagram.com/reel/DZ0J-vGyvxC/" target="_blank" class="ig-card fade-in">
+                <div class="ig-icon"><i class="fas fa-play"></i></div>
+                <div class="ig-info">
+                    <h4>Entrevista com Michel Temer</h4>
+                    <span>Ver no Instagram</span>
+                </div>
+            </a>
+
+            <a href="https://www.instagram.com/reel/DZ0Cj1lO4jl/" target="_blank" class="ig-card fade-in">
+                <div class="ig-icon"><i class="fas fa-play"></i></div>
+                <div class="ig-info">
+                    <h4>Painel da Monte Carlo no Conexidades</h4>
+                    <span>Ver no Instagram</span>
+                </div>
+            </a>
+
+            <a href="https://www.instagram.com/reel/DZoZWBMMxqG/" target="_blank" class="ig-card fade-in">
+                <div class="ig-icon"><i class="fas fa-play"></i></div>
+                <div class="ig-info">
+                    <h4>Evento Conexidades de SP</h4>
+                    <span>Ver no Instagram</span>
+                </div>
+            </a>
+
+            <a href="https://www.instagram.com/p/DZlUixtuhmI/" target="_blank" class="ig-card fade-in">
+                <div class="ig-icon"><i class="fas fa-image"></i></div>
+                <div class="ig-info">
+                    <h4>Encontro com o Embaixador da Suiça</h4>
+                    <span>Ver no Instagram</span>
+                </div>
+            </a>
+
+            <a href="https://www.instagram.com/p/DZiFGIKxi5-/" target="_blank" class="ig-card fade-in">
+                <div class="ig-icon"><i class="fas fa-image"></i></div>
+                <div class="ig-info">
+                    <h4>Conexão com o Turismo Suiço</h4>
+                    <span>Ver no Instagram</span>
+                </div>
+            </a>
         </div>
     </section>
 
-    <!-- HORIZONS / MULTIPROPRIEDADE -->
-    <section class="section horizons" id="horizons">
-        <div class="section-header">
-            <span class="section-label">Capital Fractions Multipropriedade</span>
-            <h2 class="section-title">As quatro frentes da Horizon</h2>
-            <p class="section-subtitle">Formação profissional, comercial, clube de benefícios e gestão de clientes — juntas, elas estruturam todo o ciclo da multipropriedade com precisão, escala e método.</p>
-        </div>
-
-        <div class="horizons-hero-image fade-in">
-            <img src="https://capitalfractions.com.br/wp-content/uploads/2025/01/horizons-overview.png" alt="Visão geral das quatro Horizons - Capital Fractions" onerror="this.src='https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80'">
-        </div>
-
-        <div class="horizons-grid">
-            <div class="horizon-card fade-in">
-                <div class="horizon-card-image">
-                    <img src="https://capitalfractions.com.br/wp-content/uploads/2025/01/horizon-pass.png" alt="Horizon Pass" onerror="this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80'">
-                </div>
-                <div class="horizon-card-content">
-                    <h4>Horizon Pass</h4>
-                    <p>Plataforma de acesso e gerenciamento de frações imobiliárias, conectando investidores a oportunidades exclusivas de multipropriedade.</p>
-                </div>
-            </div>
-            <div class="horizon-card fade-in">
-                <div class="horizon-card-image">
-                    <img src="https://capitalfractions.com.br/wp-content/uploads/2025/01/horizon-share.png" alt="Horizon Share" onerror="this.src='https://images.unsplash.com/photo-1560520031-3a4dc4e9de7c?w=600&q=80'">
-                </div>
-                <div class="horizon-card-content">
-                    <h4>Horizon Share</h4>
-                    <p>Compartilhamento inteligente de ativos de multipropriedade, maximizando o uso e a rentabilidade de cada fração imobiliária.</p>
-                </div>
-            </div>
-            <div class="horizon-card fade-in">
-                <div class="horizon-card-image">
-                    <img src="https://capitalfractions.com.br/wp-content/uploads/2025/01/horizon-academy.png" alt="Horizon Academy" onerror="this.src='https://images.unsplash.com/photo-1524178232363-1fb2b075b170?w=600&q=80'">
-                </div>
-                <div class="horizon-card-content">
-                    <h4>Horizon Academy</h4>
-                    <p>Formação e capacitação para investidores e gestores, desenvolvendo competências para atuar no mercado de multipropriedade.</p>
-                </div>
-            </div>
-            <div class="horizon-card fade-in">
-                <div class="horizon-card-image">
-                    <img src="https://capitalfractions.com.br/wp-content/uploads/2025/01/horizon-one.png" alt="Horizon One" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80'">
-                </div>
-                <div class="horizon-card-content">
-                    <h4>Horizon One</h4>
-                    <p>Soluções integradas de administração e investimento, oferecendo uma experiência completa e personalizada para cada cliente.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SERVICES -->
-    <section class="section services" id="services">
-        <div class="section-header">
-            <span class="section-label">Nossos Serviços</span>
-            <h2 class="section-title">Soluções sob medida para cada etapa</h2>
-            <p class="section-subtitle">Da concepção à operação, oferecemos um portfólio completo de serviços para o mercado de multipropriedade.</p>
-        </div>
-        <div class="services-grid">
-            <div class="service-card fade-in">
-                <div class="service-number">01</div>
-                <h4>Consultoria Estratégica</h4>
-                <p>Análise de mercado, viabilidade econômica e planejamento estratégico para empreendimentos de multipropriedade.</p>
-            </div>
-            <div class="service-card fade-in">
-                <div class="service-number">02</div>
-                <h4>Estruturação Jurídica</h4>
-                <p>Modelagem legal completa, contratos de multipropriedade e compliance regulatório para segurança total do investidor.</p>
-            </div>
-            <div class="service-card fade-in">
-                <div class="service-number">03</div>
-                <h4>Technology & Data</h4>
-                <p>Plataformas proprietárias de gestão, dashboards em tempo real e inteligência de dados para tomada de decisão.</p>
-            </div>
-            <div class="service-card fade-in">
-                <div class="service-number">04</div>
-                <h4>Operação & Hotelaria</h4>
-                <p>Gestão completa dos empreendimentos com padrões internacionais de hospitalidade e experiência do cliente.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- NA MÍDIA -->
-    <section class="section midia" id="midia">
-        <div class="section-header">
-            <span class="section-label">Na Mídia</span>
-            <h2 class="section-title">O que dizem sobre nós</h2>
-            <p class="section-subtitle">Acompanhe as principais matérias e publicações sobre a Capital Fractions e o ecossistema CSX Holding.</p>
-        </div>
-        <div class="midia-grid">
-            <!-- Matéria 1 - Axion Real Estate (NOVA) -->
-            <div class="midia-card fade-in">
-                <div class="midia-card-image">
-                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80" alt="Axion Real Estate">
-                    <span class="midia-card-badge">G1</span>
-                </div>
-                <div class="midia-card-content">
-                    <div class="midia-card-source">G1 Globo — Fev 2026</div>
-                    <h4>Axion Real Estate lança seu poderoso sistema imobiliário</h4>
-                    <p>A Axion Real Estate, guarda-chuva de real estate da CSX Holding, consolida um novo padrão de real estate integrado no Brasil, conectando desenvolvimento, governança e operação sob um padrão institucional único.</p>
-                    <a href="https://g1.globo.com/sp/vale-do-paraiba-regiao/especial-publicitario/csx-holding-investindo-multipropriedades/noticia/2026/02/27/axion-real-estate-lanca-seu-poderoso-sistema-imobiliario.ghtml" target="_blank" rel="noopener" class="midia-card-link">
-                        Ler matéria <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-            <!-- Matéria 2 -->
-            <div class="midia-card fade-in">
-                <div class="midia-card-image">
-                    <img src="https://images.unsplash.com/photo-1560520031-3a4dc4e9de7c?w=600&q=80" alt="Capital Fractions Multipropriedade">
-                    <span class="midia-card-badge">Cena Pop</span>
-                </div>
-                <div class="midia-card-content">
-                    <div class="midia-card-source">Cena Pop / UOL — Mar 2026</div>
-                    <h4>CSX Holding fortalece operação de multipropriedade com a Capital Fractions</h4>
-                    <p>A Capital Fractions estrutura a gestão de ativos imobiliários e integra operações de empreendimentos em um modelo voltado à eficiência e escala no mercado brasileiro.</p>
-                    <a href="https://cenapop.uol.com.br/noticias/negocios/csx-holding-liderada-por-caio-santomo-fortalece-operacao-de-multipropriedade-no-brasil-com-a-capital-fractions.html" target="_blank" rel="noopener" class="midia-card-link">
-                        Ler matéria <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-            <!-- Matéria 3 -->
-            <div class="midia-card fade-in">
-                <div class="midia-card-image">
-                    <img src="https://images.unsplash.com/photo-1582407947092-40a67c9f3685?w=600&q=80" alt="Internacionalização CSX Holding">
-                    <span class="midia-card-badge">G1</span>
-                </div>
-                <div class="midia-card-content">
-                    <div class="midia-card-source">G1 Globo — Jun 2026</div>
-                    <h4>Encontro em Londres avança estratégia de internacionalização da CSX Holding</h4>
-                    <p>Reunião na residência de Sua Alteza em Londres teve foco em fundos nacionais e internacionais, atração de investimentos e expansão da Monte Carlo Multipropriedade.</p>
-                    <a href="https://g1.globo.com/sp/vale-do-paraiba-regiao/especial-publicitario/csx-holding-investindo-multipropriedades/noticia/2026/06/08/evento-em-londres-avanca-estrategia-de-internacionalizacao-da-csx-holding.ghtml" target="_blank" rel="noopener" class="midia-card-link">
-                        Ler matéria <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-            <!-- Matéria 4 -->
-            <div class="midia-card fade-in">
-                <div class="midia-card-image">
-                    <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80" alt="Monte Carlo Multipropriedade">
-                    <span class="midia-card-badge">G1</span>
-                </div>
-                <div class="midia-card-content">
-                    <div class="midia-card-source">G1 Globo — Fev 2026</div>
-                    <h4>Monte Carlo Incorporadora fortalece o mercado imobiliário</h4>
-                    <p>A Monte Carlo se consolida como protagonista na incorporação de empreendimentos de alto padrão com foco em visão de longo prazo e valorização patrimonial.</p>
-                    <a href="https://g1.globo.com/sp/vale-do-paraiba-regiao/especial-publicitario/csx-holding-investindo-multipropriedades/noticia/2026/02/27/monte-carlo-incorporadora-and-multipropriedade-fortalece-o-mercado-imobiliario.ghtml" target="_blank" rel="noopener" class="midia-card-link">
-                        Ler matéria <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="cta" id="contact">
-        <h2>Pronto para investir com <span style="background: var(--gradient-gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">inteligência</span>?</h2>
-        <p>Entre em contato com nosso time e descubra como a Capital Fractions pode estruturar sua próxima operação imobiliária.</p>
-        <a href="mailto:contato@capitalfractions.com.br" class="btn-primary">Entre em Contato</a>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-        <div class="footer-grid">
-            <div>
-                <div class="footer-brand">Capital <span>Fractions</span></div>
-                <p class="footer-desc">Estruturação, gestão e comercialização de ativos imobiliários com tecnologia, governança e escala. Conectando o futuro da multipropriedade.</p>
-                <div class="footer-social">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                </div>
-            </div>
-            <div class="footer-col">
-                <h5>Empresa</h5>
-                <ul>
-                    <li><a href="#about">Sobre Nós</a></li>
-                    <li><a href="#ecosystem">Ecossistema</a></li>
-                    <li><a href="#horizons">Multipropriedade</a></li>
-                    <li><a href="#midia">Na Mídia</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h5>Serviços</h5>
-                <ul>
-                    <li><a href="#services">Consultoria</a></li>
-                    <li><a href="#services">Estruturação</a></li>
-                    <li><a href="#services">Tecnologia</a></li>
-                    <li><a href="#services">Operação</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h5>Contato</h5>
-                <ul>
-                    <li><a href="mailto:contato@capitalfractions.com.br">contato@capitalfractions.com.br</a></li>
-                    <li><a href="#">São José dos Campos, SP</a></li>
-                    <li><a href="#">+55 (12) 0000-0000</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Capital Fractions. Todos os direitos reservados. | Parte do ecossistema CSX Holding.</p>
-        </div>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">Collina d'Italia</div>
+        <p>&copy; 2026 Collina d'Italia · Grupo CSX Holding. Todos os direitos reservados. | <a href="https://collinaditalia.com.br/" target="_blank">Site Oficial</a></p>
     </footer>
 
-    <!-- SCRIPTS -->
     <script>
         // Navbar scroll effect
         window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
+            const nav = document.getElementById('navbar');
             if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
+                nav.classList.add('scrolled');
             } else {
-                navbar.classList.remove('scrolled');
+                nav.classList.remove('scrolled');
             }
         });
 
-        // Mobile menu toggle
-        function toggleMenu() {
-            document.getElementById('navLinks').classList.toggle('active');
-        }
-
-        // Close menu on link click
-        document.querySelectorAll('.navbar-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.getElementById('navLinks').classList.remove('active');
+        // Animação de fade-in ao rolar a página
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
             });
-        });
 
-        // Scroll animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
             });
         });
     </script>
